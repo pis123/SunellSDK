@@ -61,5 +61,28 @@ fastlane/Preview.html
 fastlane/screenshots/**/*.png
 fastlane/test_output
 
-# SunellSDK / SwiftPM 分发
-# 不要将 Distribution/SunellSDK/SunellSDK.xcframework 加入本文件；path 型 binaryTarget 需要随仓库提交该目录。
+# SunellSDK / SwiftPM distribution
+# This repo uses URL-based binaryTarget release flow (not path-based).
+
+# Enterprise SwiftPM binary release artifacts
+.swiftpm/
+build/
+Distribution/SunellSDK/*.xcframework
+Distribution/SunellSDK/*.xcframework.zip
+Distribution/SunellSDK/*.checksum.txt
+
+# Binary artifacts (IMPORTANT)
+*.a
+*.xcframework
+*.zip
+
+# Build outputs
+build/
+DerivedData/
+.swiftpm/
+
+# SPM distribution artifacts
+Distribution/
+
+
+
