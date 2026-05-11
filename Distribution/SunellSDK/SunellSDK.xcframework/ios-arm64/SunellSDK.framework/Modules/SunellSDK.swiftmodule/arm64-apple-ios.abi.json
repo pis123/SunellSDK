@@ -1,0 +1,3181 @@
+{
+  "ABIRoot": {
+    "kind": "Root",
+    "name": "SunellSDK",
+    "printedName": "SunellSDK",
+    "children": [
+      {
+        "kind": "Import",
+        "name": "Foundation",
+        "printedName": "Foundation",
+        "declKind": "Import",
+        "moduleName": "SunellSDK",
+        "declAttributes": [
+          "RawDocComment"
+        ]
+      },
+      {
+        "kind": "Import",
+        "name": "UIKit",
+        "printedName": "UIKit",
+        "declKind": "Import",
+        "moduleName": "SunellSDK"
+      },
+      {
+        "kind": "TypeDecl",
+        "name": "SunellPlaybackSpeed",
+        "printedName": "SunellPlaybackSpeed",
+        "children": [
+          {
+            "kind": "Var",
+            "name": "x1",
+            "printedName": "x1",
+            "children": [
+              {
+                "kind": "TypeFunc",
+                "name": "Function",
+                "printedName": "(SunellSDK.SunellPlaybackSpeed.Type) -> SunellSDK.SunellPlaybackSpeed",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "SunellPlaybackSpeed",
+                    "printedName": "SunellSDK.SunellPlaybackSpeed",
+                    "usr": "s:9SunellSDK0A13PlaybackSpeedO"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Metatype",
+                    "printedName": "SunellSDK.SunellPlaybackSpeed.Type",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "SunellPlaybackSpeed",
+                        "printedName": "SunellSDK.SunellPlaybackSpeed",
+                        "usr": "s:9SunellSDK0A13PlaybackSpeedO"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "declKind": "EnumElement",
+            "usr": "s:9SunellSDK0A13PlaybackSpeedO2x1yA2CmF",
+            "mangledName": "$s9SunellSDK0A13PlaybackSpeedO2x1yA2CmF",
+            "moduleName": "SunellSDK",
+            "declAttributes": [
+              "RawDocComment"
+            ]
+          },
+          {
+            "kind": "Var",
+            "name": "x2",
+            "printedName": "x2",
+            "children": [
+              {
+                "kind": "TypeFunc",
+                "name": "Function",
+                "printedName": "(SunellSDK.SunellPlaybackSpeed.Type) -> SunellSDK.SunellPlaybackSpeed",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "SunellPlaybackSpeed",
+                    "printedName": "SunellSDK.SunellPlaybackSpeed",
+                    "usr": "s:9SunellSDK0A13PlaybackSpeedO"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Metatype",
+                    "printedName": "SunellSDK.SunellPlaybackSpeed.Type",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "SunellPlaybackSpeed",
+                        "printedName": "SunellSDK.SunellPlaybackSpeed",
+                        "usr": "s:9SunellSDK0A13PlaybackSpeedO"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "declKind": "EnumElement",
+            "usr": "s:9SunellSDK0A13PlaybackSpeedO2x2yA2CmF",
+            "mangledName": "$s9SunellSDK0A13PlaybackSpeedO2x2yA2CmF",
+            "moduleName": "SunellSDK",
+            "declAttributes": [
+              "RawDocComment"
+            ]
+          },
+          {
+            "kind": "Constructor",
+            "name": "init",
+            "printedName": "init(rawValue:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "SunellSDK.SunellPlaybackSpeed?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "SunellPlaybackSpeed",
+                    "printedName": "SunellSDK.SunellPlaybackSpeed",
+                    "usr": "s:9SunellSDK0A13PlaybackSpeedO"
+                  }
+                ],
+                "usr": "s:Sq"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Int",
+                "printedName": "Swift.Int",
+                "usr": "s:Si"
+              }
+            ],
+            "declKind": "Constructor",
+            "usr": "s:9SunellSDK0A13PlaybackSpeedO8rawValueACSgSi_tcfc",
+            "mangledName": "$s9SunellSDK0A13PlaybackSpeedO8rawValueACSgSi_tcfc",
+            "moduleName": "SunellSDK",
+            "implicit": true,
+            "init_kind": "Designated"
+          },
+          {
+            "kind": "Var",
+            "name": "rawValue",
+            "printedName": "rawValue",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Int",
+                "printedName": "Swift.Int",
+                "usr": "s:Si"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:9SunellSDK0A13PlaybackSpeedO8rawValueSivp",
+            "mangledName": "$s9SunellSDK0A13PlaybackSpeedO8rawValueSivp",
+            "moduleName": "SunellSDK",
+            "implicit": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Int",
+                    "printedName": "Swift.Int",
+                    "usr": "s:Si"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:9SunellSDK0A13PlaybackSpeedO8rawValueSivg",
+                "mangledName": "$s9SunellSDK0A13PlaybackSpeedO8rawValueSivg",
+                "moduleName": "SunellSDK",
+                "implicit": true,
+                "accessorKind": "get"
+              }
+            ]
+          },
+          {
+            "kind": "Var",
+            "name": "allCases",
+            "printedName": "allCases",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Array",
+                "printedName": "[SunellSDK.SunellPlaybackSpeed]",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "SunellPlaybackSpeed",
+                    "printedName": "SunellSDK.SunellPlaybackSpeed",
+                    "usr": "s:9SunellSDK0A13PlaybackSpeedO"
+                  }
+                ],
+                "usr": "s:Sa"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:9SunellSDK0A13PlaybackSpeedO8allCasesSayACGvpZ",
+            "mangledName": "$s9SunellSDK0A13PlaybackSpeedO8allCasesSayACGvpZ",
+            "moduleName": "SunellSDK",
+            "static": true,
+            "implicit": true,
+            "declAttributes": [
+              "Nonisolated"
+            ],
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Array",
+                    "printedName": "[SunellSDK.SunellPlaybackSpeed]",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "SunellPlaybackSpeed",
+                        "printedName": "SunellSDK.SunellPlaybackSpeed",
+                        "usr": "s:9SunellSDK0A13PlaybackSpeedO"
+                      }
+                    ],
+                    "usr": "s:Sa"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:9SunellSDK0A13PlaybackSpeedO8allCasesSayACGvgZ",
+                "mangledName": "$s9SunellSDK0A13PlaybackSpeedO8allCasesSayACGvgZ",
+                "moduleName": "SunellSDK",
+                "static": true,
+                "implicit": true,
+                "accessorKind": "get"
+              }
+            ]
+          }
+        ],
+        "declKind": "Enum",
+        "usr": "s:9SunellSDK0A13PlaybackSpeedO",
+        "mangledName": "$s9SunellSDK0A13PlaybackSpeedO",
+        "moduleName": "SunellSDK",
+        "declAttributes": [
+          "AccessControl",
+          "RawDocComment"
+        ],
+        "enumRawTypeName": "Int",
+        "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Equatable",
+            "printedName": "Equatable",
+            "usr": "s:SQ",
+            "mangledName": "$sSQ"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Hashable",
+            "printedName": "Hashable",
+            "usr": "s:SH",
+            "mangledName": "$sSH"
+          },
+          {
+            "kind": "Conformance",
+            "name": "RawRepresentable",
+            "printedName": "RawRepresentable",
+            "children": [
+              {
+                "kind": "TypeWitness",
+                "name": "RawValue",
+                "printedName": "RawValue",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Int",
+                    "printedName": "Swift.Int",
+                    "usr": "s:Si"
+                  }
+                ]
+              }
+            ],
+            "usr": "s:SY",
+            "mangledName": "$sSY"
+          },
+          {
+            "kind": "Conformance",
+            "name": "CaseIterable",
+            "printedName": "CaseIterable",
+            "children": [
+              {
+                "kind": "TypeWitness",
+                "name": "AllCases",
+                "printedName": "AllCases",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Array",
+                    "printedName": "[SunellSDK.SunellPlaybackSpeed]",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "SunellPlaybackSpeed",
+                        "printedName": "SunellSDK.SunellPlaybackSpeed",
+                        "usr": "s:9SunellSDK0A13PlaybackSpeedO"
+                      }
+                    ],
+                    "usr": "s:Sa"
+                  }
+                ]
+              }
+            ],
+            "usr": "s:s12CaseIterableP",
+            "mangledName": "$ss12CaseIterableP"
+          }
+        ]
+      },
+      {
+        "kind": "TypeDecl",
+        "name": "SunellDeviceChannelStatus",
+        "printedName": "SunellDeviceChannelStatus",
+        "children": [
+          {
+            "kind": "Var",
+            "name": "unkonw",
+            "printedName": "unkonw",
+            "children": [
+              {
+                "kind": "TypeFunc",
+                "name": "Function",
+                "printedName": "(SunellSDK.SunellDeviceChannelStatus.Type) -> SunellSDK.SunellDeviceChannelStatus",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "SunellDeviceChannelStatus",
+                    "printedName": "SunellSDK.SunellDeviceChannelStatus",
+                    "usr": "s:9SunellSDK0A19DeviceChannelStatusO"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Metatype",
+                    "printedName": "SunellSDK.SunellDeviceChannelStatus.Type",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "SunellDeviceChannelStatus",
+                        "printedName": "SunellSDK.SunellDeviceChannelStatus",
+                        "usr": "s:9SunellSDK0A19DeviceChannelStatusO"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "declKind": "EnumElement",
+            "usr": "s:9SunellSDK0A19DeviceChannelStatusO6unkonwyA2CmF",
+            "mangledName": "$s9SunellSDK0A19DeviceChannelStatusO6unkonwyA2CmF",
+            "moduleName": "SunellSDK"
+          },
+          {
+            "kind": "Var",
+            "name": "online",
+            "printedName": "online",
+            "children": [
+              {
+                "kind": "TypeFunc",
+                "name": "Function",
+                "printedName": "(SunellSDK.SunellDeviceChannelStatus.Type) -> SunellSDK.SunellDeviceChannelStatus",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "SunellDeviceChannelStatus",
+                    "printedName": "SunellSDK.SunellDeviceChannelStatus",
+                    "usr": "s:9SunellSDK0A19DeviceChannelStatusO"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Metatype",
+                    "printedName": "SunellSDK.SunellDeviceChannelStatus.Type",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "SunellDeviceChannelStatus",
+                        "printedName": "SunellSDK.SunellDeviceChannelStatus",
+                        "usr": "s:9SunellSDK0A19DeviceChannelStatusO"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "declKind": "EnumElement",
+            "usr": "s:9SunellSDK0A19DeviceChannelStatusO6onlineyA2CmF",
+            "mangledName": "$s9SunellSDK0A19DeviceChannelStatusO6onlineyA2CmF",
+            "moduleName": "SunellSDK"
+          },
+          {
+            "kind": "Var",
+            "name": "offline",
+            "printedName": "offline",
+            "children": [
+              {
+                "kind": "TypeFunc",
+                "name": "Function",
+                "printedName": "(SunellSDK.SunellDeviceChannelStatus.Type) -> SunellSDK.SunellDeviceChannelStatus",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "SunellDeviceChannelStatus",
+                    "printedName": "SunellSDK.SunellDeviceChannelStatus",
+                    "usr": "s:9SunellSDK0A19DeviceChannelStatusO"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Metatype",
+                    "printedName": "SunellSDK.SunellDeviceChannelStatus.Type",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "SunellDeviceChannelStatus",
+                        "printedName": "SunellSDK.SunellDeviceChannelStatus",
+                        "usr": "s:9SunellSDK0A19DeviceChannelStatusO"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "declKind": "EnumElement",
+            "usr": "s:9SunellSDK0A19DeviceChannelStatusO7offlineyA2CmF",
+            "mangledName": "$s9SunellSDK0A19DeviceChannelStatusO7offlineyA2CmF",
+            "moduleName": "SunellSDK"
+          },
+          {
+            "kind": "Constructor",
+            "name": "init",
+            "printedName": "init(rawValue:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "SunellSDK.SunellDeviceChannelStatus?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "SunellDeviceChannelStatus",
+                    "printedName": "SunellSDK.SunellDeviceChannelStatus",
+                    "usr": "s:9SunellSDK0A19DeviceChannelStatusO"
+                  }
+                ],
+                "usr": "s:Sq"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Int",
+                "printedName": "Swift.Int",
+                "usr": "s:Si"
+              }
+            ],
+            "declKind": "Constructor",
+            "usr": "s:9SunellSDK0A19DeviceChannelStatusO8rawValueACSgSi_tcfc",
+            "mangledName": "$s9SunellSDK0A19DeviceChannelStatusO8rawValueACSgSi_tcfc",
+            "moduleName": "SunellSDK",
+            "implicit": true,
+            "init_kind": "Designated"
+          },
+          {
+            "kind": "Var",
+            "name": "rawValue",
+            "printedName": "rawValue",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Int",
+                "printedName": "Swift.Int",
+                "usr": "s:Si"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:9SunellSDK0A19DeviceChannelStatusO8rawValueSivp",
+            "mangledName": "$s9SunellSDK0A19DeviceChannelStatusO8rawValueSivp",
+            "moduleName": "SunellSDK",
+            "implicit": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Int",
+                    "printedName": "Swift.Int",
+                    "usr": "s:Si"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:9SunellSDK0A19DeviceChannelStatusO8rawValueSivg",
+                "mangledName": "$s9SunellSDK0A19DeviceChannelStatusO8rawValueSivg",
+                "moduleName": "SunellSDK",
+                "implicit": true,
+                "accessorKind": "get"
+              }
+            ]
+          },
+          {
+            "kind": "Var",
+            "name": "allCases",
+            "printedName": "allCases",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Array",
+                "printedName": "[SunellSDK.SunellDeviceChannelStatus]",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "SunellDeviceChannelStatus",
+                    "printedName": "SunellSDK.SunellDeviceChannelStatus",
+                    "usr": "s:9SunellSDK0A19DeviceChannelStatusO"
+                  }
+                ],
+                "usr": "s:Sa"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:9SunellSDK0A19DeviceChannelStatusO8allCasesSayACGvpZ",
+            "mangledName": "$s9SunellSDK0A19DeviceChannelStatusO8allCasesSayACGvpZ",
+            "moduleName": "SunellSDK",
+            "static": true,
+            "implicit": true,
+            "declAttributes": [
+              "Nonisolated"
+            ],
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Array",
+                    "printedName": "[SunellSDK.SunellDeviceChannelStatus]",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "SunellDeviceChannelStatus",
+                        "printedName": "SunellSDK.SunellDeviceChannelStatus",
+                        "usr": "s:9SunellSDK0A19DeviceChannelStatusO"
+                      }
+                    ],
+                    "usr": "s:Sa"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:9SunellSDK0A19DeviceChannelStatusO8allCasesSayACGvgZ",
+                "mangledName": "$s9SunellSDK0A19DeviceChannelStatusO8allCasesSayACGvgZ",
+                "moduleName": "SunellSDK",
+                "static": true,
+                "implicit": true,
+                "accessorKind": "get"
+              }
+            ]
+          }
+        ],
+        "declKind": "Enum",
+        "usr": "s:9SunellSDK0A19DeviceChannelStatusO",
+        "mangledName": "$s9SunellSDK0A19DeviceChannelStatusO",
+        "moduleName": "SunellSDK",
+        "declAttributes": [
+          "AccessControl"
+        ],
+        "enumRawTypeName": "Int",
+        "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Equatable",
+            "printedName": "Equatable",
+            "usr": "s:SQ",
+            "mangledName": "$sSQ"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Hashable",
+            "printedName": "Hashable",
+            "usr": "s:SH",
+            "mangledName": "$sSH"
+          },
+          {
+            "kind": "Conformance",
+            "name": "RawRepresentable",
+            "printedName": "RawRepresentable",
+            "children": [
+              {
+                "kind": "TypeWitness",
+                "name": "RawValue",
+                "printedName": "RawValue",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Int",
+                    "printedName": "Swift.Int",
+                    "usr": "s:Si"
+                  }
+                ]
+              }
+            ],
+            "usr": "s:SY",
+            "mangledName": "$sSY"
+          },
+          {
+            "kind": "Conformance",
+            "name": "CaseIterable",
+            "printedName": "CaseIterable",
+            "children": [
+              {
+                "kind": "TypeWitness",
+                "name": "AllCases",
+                "printedName": "AllCases",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Array",
+                    "printedName": "[SunellSDK.SunellDeviceChannelStatus]",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "SunellDeviceChannelStatus",
+                        "printedName": "SunellSDK.SunellDeviceChannelStatus",
+                        "usr": "s:9SunellSDK0A19DeviceChannelStatusO"
+                      }
+                    ],
+                    "usr": "s:Sa"
+                  }
+                ]
+              }
+            ],
+            "usr": "s:s12CaseIterableP",
+            "mangledName": "$ss12CaseIterableP"
+          }
+        ]
+      },
+      {
+        "kind": "TypeDecl",
+        "name": "SunellSDKEntry",
+        "printedName": "SunellSDKEntry",
+        "children": [
+          {
+            "kind": "TypeDecl",
+            "name": "Delegate",
+            "printedName": "Delegate",
+            "children": [
+              {
+                "kind": "Function",
+                "name": "sunellSDKDeviceErrorStatus",
+                "printedName": "sunellSDKDeviceErrorStatus(_:_:)",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "SunellDeviceModel",
+                    "printedName": "SunellSDK.SunellDeviceModel",
+                    "usr": "c:objc(cs)SunellDeviceModel"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Int32",
+                    "printedName": "Swift.Int32",
+                    "usr": "s:s5Int32V"
+                  }
+                ],
+                "declKind": "Func",
+                "usr": "s:9SunellSDK0A8SDKEntryC8DelegateP26sunellSDKDeviceErrorStatusyySo0A11DeviceModelC_s5Int32VtF",
+                "mangledName": "$s9SunellSDK0A8SDKEntryC8DelegateP26sunellSDKDeviceErrorStatusyySo0A11DeviceModelC_s5Int32VtF",
+                "moduleName": "SunellSDK",
+                "genericSig": "<τ_0_0 where τ_0_0 : SunellSDK.SunellSDKEntry.Delegate>",
+                "sugared_genericSig": "<Self where Self : SunellSDK.SunellSDKEntry.Delegate>",
+                "protocolReq": true,
+                "declAttributes": [
+                  "RawDocComment"
+                ],
+                "reqNewWitnessTableEntry": true,
+                "funcSelfKind": "NonMutating"
+              },
+              {
+                "kind": "Function",
+                "name": "sunellSDKStartAutoReconnect",
+                "printedName": "sunellSDKStartAutoReconnect(_:)",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "SunellDeviceModel",
+                    "printedName": "SunellSDK.SunellDeviceModel",
+                    "usr": "c:objc(cs)SunellDeviceModel"
+                  }
+                ],
+                "declKind": "Func",
+                "usr": "s:9SunellSDK0A8SDKEntryC8DelegateP27sunellSDKStartAutoReconnectyySo0A11DeviceModelCF",
+                "mangledName": "$s9SunellSDK0A8SDKEntryC8DelegateP27sunellSDKStartAutoReconnectyySo0A11DeviceModelCF",
+                "moduleName": "SunellSDK",
+                "genericSig": "<τ_0_0 where τ_0_0 : SunellSDK.SunellSDKEntry.Delegate>",
+                "sugared_genericSig": "<Self where Self : SunellSDK.SunellSDKEntry.Delegate>",
+                "protocolReq": true,
+                "declAttributes": [
+                  "RawDocComment"
+                ],
+                "reqNewWitnessTableEntry": true,
+                "funcSelfKind": "NonMutating"
+              },
+              {
+                "kind": "Function",
+                "name": "sunellSDKEndAutoReconnect",
+                "printedName": "sunellSDKEndAutoReconnect(_:_:)",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "SunellDeviceModel",
+                    "printedName": "SunellSDK.SunellDeviceModel",
+                    "usr": "c:objc(cs)SunellDeviceModel"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Bool",
+                    "printedName": "Swift.Bool",
+                    "usr": "s:Sb"
+                  }
+                ],
+                "declKind": "Func",
+                "usr": "s:9SunellSDK0A8SDKEntryC8DelegateP25sunellSDKEndAutoReconnectyySo0A11DeviceModelC_SbtF",
+                "mangledName": "$s9SunellSDK0A8SDKEntryC8DelegateP25sunellSDKEndAutoReconnectyySo0A11DeviceModelC_SbtF",
+                "moduleName": "SunellSDK",
+                "genericSig": "<τ_0_0 where τ_0_0 : SunellSDK.SunellSDKEntry.Delegate>",
+                "sugared_genericSig": "<Self where Self : SunellSDK.SunellSDKEntry.Delegate>",
+                "protocolReq": true,
+                "declAttributes": [
+                  "RawDocComment"
+                ],
+                "reqNewWitnessTableEntry": true,
+                "funcSelfKind": "NonMutating"
+              },
+              {
+                "kind": "Function",
+                "name": "sunellSDKAlarmInfo",
+                "printedName": "sunellSDKAlarmInfo(_:alarmInfo:)",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "SunellDeviceModel",
+                    "printedName": "SunellSDK.SunellDeviceModel",
+                    "usr": "c:objc(cs)SunellDeviceModel"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "String",
+                    "printedName": "Swift.String",
+                    "usr": "s:SS"
+                  }
+                ],
+                "declKind": "Func",
+                "usr": "s:9SunellSDK0A8SDKEntryC8DelegateP18sunellSDKAlarmInfo_05alarmG0ySo0A11DeviceModelC_SStF",
+                "mangledName": "$s9SunellSDK0A8SDKEntryC8DelegateP18sunellSDKAlarmInfo_05alarmG0ySo0A11DeviceModelC_SStF",
+                "moduleName": "SunellSDK",
+                "genericSig": "<τ_0_0 where τ_0_0 : SunellSDK.SunellSDKEntry.Delegate>",
+                "sugared_genericSig": "<Self where Self : SunellSDK.SunellSDKEntry.Delegate>",
+                "protocolReq": true,
+                "declAttributes": [
+                  "RawDocComment"
+                ],
+                "reqNewWitnessTableEntry": true,
+                "funcSelfKind": "NonMutating"
+              },
+              {
+                "kind": "Function",
+                "name": "sunellSDKVideoOperation",
+                "printedName": "sunellSDKVideoOperation(_:channelId:eventId:msg:playModel:)",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "String",
+                    "printedName": "Swift.String",
+                    "usr": "s:SS"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Int",
+                    "printedName": "Swift.Int",
+                    "usr": "s:Si"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Int",
+                    "printedName": "Swift.Int",
+                    "usr": "s:Si"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "String",
+                    "printedName": "Swift.String",
+                    "usr": "s:SS"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Int",
+                    "printedName": "Swift.Int",
+                    "usr": "s:Si"
+                  }
+                ],
+                "declKind": "Func",
+                "usr": "s:9SunellSDK0A8SDKEntryC8DelegateP23sunellSDKVideoOperation_9channelId05eventI03msg9playModelySS_S2iSSSitF",
+                "mangledName": "$s9SunellSDK0A8SDKEntryC8DelegateP23sunellSDKVideoOperation_9channelId05eventI03msg9playModelySS_S2iSSSitF",
+                "moduleName": "SunellSDK",
+                "genericSig": "<τ_0_0 where τ_0_0 : SunellSDK.SunellSDKEntry.Delegate>",
+                "sugared_genericSig": "<Self where Self : SunellSDK.SunellSDKEntry.Delegate>",
+                "protocolReq": true,
+                "declAttributes": [
+                  "RawDocComment"
+                ],
+                "reqNewWitnessTableEntry": true,
+                "funcSelfKind": "NonMutating"
+              },
+              {
+                "kind": "Function",
+                "name": "sunellSDKChannelStatusChange",
+                "printedName": "sunellSDKChannelStatusChange(_:)",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "SunellChannelModel",
+                    "printedName": "SunellSDK.SunellChannelModel",
+                    "usr": "c:objc(cs)SunellChannelModel"
+                  }
+                ],
+                "declKind": "Func",
+                "usr": "s:9SunellSDK0A8SDKEntryC8DelegateP28sunellSDKChannelStatusChangeyySo0A12ChannelModelCF",
+                "mangledName": "$s9SunellSDK0A8SDKEntryC8DelegateP28sunellSDKChannelStatusChangeyySo0A12ChannelModelCF",
+                "moduleName": "SunellSDK",
+                "genericSig": "<τ_0_0 where τ_0_0 : SunellSDK.SunellSDKEntry.Delegate>",
+                "sugared_genericSig": "<Self where Self : SunellSDK.SunellSDKEntry.Delegate>",
+                "protocolReq": true,
+                "declAttributes": [
+                  "RawDocComment"
+                ],
+                "reqNewWitnessTableEntry": true,
+                "funcSelfKind": "NonMutating"
+              }
+            ],
+            "declKind": "Protocol",
+            "usr": "s:9SunellSDK0A8SDKEntryC8DelegateP",
+            "mangledName": "$s9SunellSDK0A8SDKEntryC8DelegateP",
+            "moduleName": "SunellSDK",
+            "genericSig": "<τ_0_0 : AnyObject>",
+            "sugared_genericSig": "<Self : AnyObject>",
+            "declAttributes": [
+              "AccessControl",
+              "RawDocComment"
+            ],
+            "conformances": [
+              {
+                "kind": "Conformance",
+                "name": "Escapable",
+                "printedName": "Escapable",
+                "usr": "s:s9EscapableP",
+                "mangledName": "$ss9EscapableP"
+              },
+              {
+                "kind": "Conformance",
+                "name": "Copyable",
+                "printedName": "Copyable",
+                "usr": "s:s8CopyableP",
+                "mangledName": "$ss8CopyableP"
+              }
+            ]
+          },
+          {
+            "kind": "Var",
+            "name": "delegate",
+            "printedName": "delegate",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "WeakStorage",
+                "printedName": "(any SunellSDK.SunellSDKEntry.Delegate)?"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:9SunellSDK0A8SDKEntryC8delegateAC8Delegate_pSgvpZ",
+            "mangledName": "$s9SunellSDK0A8SDKEntryC8delegateAC8Delegate_pSgvpZ",
+            "moduleName": "SunellSDK",
+            "static": true,
+            "declAttributes": [
+              "HasInitialValue",
+              "Final",
+              "HasStorage",
+              "ReferenceOwnership",
+              "AccessControl",
+              "RawDocComment"
+            ],
+            "ownership": 1,
+            "hasStorage": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Optional",
+                    "printedName": "(any SunellSDK.SunellSDKEntry.Delegate)?",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Delegate",
+                        "printedName": "any SunellSDK.SunellSDKEntry.Delegate",
+                        "usr": "s:9SunellSDK0A8SDKEntryC8DelegateP"
+                      }
+                    ],
+                    "usr": "s:Sq"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:9SunellSDK0A8SDKEntryC8delegateAC8Delegate_pSgvgZ",
+                "mangledName": "$s9SunellSDK0A8SDKEntryC8delegateAC8Delegate_pSgvgZ",
+                "moduleName": "SunellSDK",
+                "static": true,
+                "implicit": true,
+                "declAttributes": [
+                  "Final"
+                ],
+                "accessorKind": "get"
+              },
+              {
+                "kind": "Accessor",
+                "name": "Set",
+                "printedName": "Set()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Optional",
+                    "printedName": "(any SunellSDK.SunellSDKEntry.Delegate)?",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Delegate",
+                        "printedName": "any SunellSDK.SunellSDKEntry.Delegate",
+                        "usr": "s:9SunellSDK0A8SDKEntryC8DelegateP"
+                      }
+                    ],
+                    "usr": "s:Sq"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:9SunellSDK0A8SDKEntryC8delegateAC8Delegate_pSgvsZ",
+                "mangledName": "$s9SunellSDK0A8SDKEntryC8delegateAC8Delegate_pSgvsZ",
+                "moduleName": "SunellSDK",
+                "static": true,
+                "implicit": true,
+                "declAttributes": [
+                  "Final"
+                ],
+                "accessorKind": "set"
+              },
+              {
+                "kind": "Accessor",
+                "name": "Modify",
+                "printedName": "Modify()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:9SunellSDK0A8SDKEntryC8delegateAC8Delegate_pSgvMZ",
+                "mangledName": "$s9SunellSDK0A8SDKEntryC8delegateAC8Delegate_pSgvMZ",
+                "moduleName": "SunellSDK",
+                "static": true,
+                "implicit": true,
+                "declAttributes": [
+                  "Final"
+                ],
+                "accessorKind": "_modify"
+              }
+            ]
+          },
+          {
+            "kind": "Var",
+            "name": "delegate",
+            "printedName": "delegate",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "(any SunellSDK.SunellSDKEntry.Delegate)?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Delegate",
+                    "printedName": "any SunellSDK.SunellSDKEntry.Delegate",
+                    "usr": "s:9SunellSDK0A8SDKEntryC8DelegateP"
+                  }
+                ],
+                "usr": "s:Sq"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:9SunellSDK0A8SDKEntryC8delegateAC8Delegate_pSgvp",
+            "mangledName": "$s9SunellSDK0A8SDKEntryC8delegateAC8Delegate_pSgvp",
+            "moduleName": "SunellSDK",
+            "declAttributes": [
+              "AccessControl",
+              "RawDocComment"
+            ],
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Optional",
+                    "printedName": "(any SunellSDK.SunellSDKEntry.Delegate)?",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Delegate",
+                        "printedName": "any SunellSDK.SunellSDKEntry.Delegate",
+                        "usr": "s:9SunellSDK0A8SDKEntryC8DelegateP"
+                      }
+                    ],
+                    "usr": "s:Sq"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:9SunellSDK0A8SDKEntryC8delegateAC8Delegate_pSgvg",
+                "mangledName": "$s9SunellSDK0A8SDKEntryC8delegateAC8Delegate_pSgvg",
+                "moduleName": "SunellSDK",
+                "accessorKind": "get"
+              },
+              {
+                "kind": "Accessor",
+                "name": "Set",
+                "printedName": "Set()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Optional",
+                    "printedName": "(any SunellSDK.SunellSDKEntry.Delegate)?",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Delegate",
+                        "printedName": "any SunellSDK.SunellSDKEntry.Delegate",
+                        "usr": "s:9SunellSDK0A8SDKEntryC8DelegateP"
+                      }
+                    ],
+                    "usr": "s:Sq"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:9SunellSDK0A8SDKEntryC8delegateAC8Delegate_pSgvs",
+                "mangledName": "$s9SunellSDK0A8SDKEntryC8delegateAC8Delegate_pSgvs",
+                "moduleName": "SunellSDK",
+                "accessorKind": "set"
+              },
+              {
+                "kind": "Accessor",
+                "name": "Modify",
+                "printedName": "Modify()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:9SunellSDK0A8SDKEntryC8delegateAC8Delegate_pSgvM",
+                "mangledName": "$s9SunellSDK0A8SDKEntryC8delegateAC8Delegate_pSgvM",
+                "moduleName": "SunellSDK",
+                "implicit": true,
+                "accessorKind": "_modify"
+              }
+            ]
+          },
+          {
+            "kind": "Var",
+            "name": "shared",
+            "printedName": "shared",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "SunellSDKEntry",
+                "printedName": "SunellSDK.SunellSDKEntry",
+                "usr": "c:@M@SunellSDK@objc(cs)SunellSDK"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "c:@M@SunellSDK@objc(cs)SunellSDK(cpy)shared",
+            "mangledName": "$s9SunellSDK0A8SDKEntryC6sharedACvpZ",
+            "moduleName": "SunellSDK",
+            "static": true,
+            "declAttributes": [
+              "HasInitialValue",
+              "Final",
+              "HasStorage",
+              "AccessControl",
+              "ObjC"
+            ],
+            "isLet": true,
+            "hasStorage": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "SunellSDKEntry",
+                    "printedName": "SunellSDK.SunellSDKEntry",
+                    "usr": "c:@M@SunellSDK@objc(cs)SunellSDK"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "c:@M@SunellSDK@objc(cs)SunellSDK(cm)shared",
+                "mangledName": "$s9SunellSDK0A8SDKEntryC6sharedACvgZ",
+                "moduleName": "SunellSDK",
+                "static": true,
+                "implicit": true,
+                "declAttributes": [
+                  "Final",
+                  "ObjC"
+                ],
+                "accessorKind": "get"
+              }
+            ]
+          },
+          {
+            "kind": "Function",
+            "name": "connectDevByP2P",
+            "printedName": "connectDevByP2P(uuid:port:user:pwd:resultBlock:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Int",
+                "printedName": "Swift.Int",
+                "usr": "s:Si"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              },
+              {
+                "kind": "TypeFunc",
+                "name": "Function",
+                "printedName": "(Swift.Int, SunellSDK.SunellDeviceModel) -> ()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Tuple",
+                    "printedName": "(Swift.Int, SunellSDK.SunellDeviceModel)",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Int",
+                        "printedName": "Swift.Int",
+                        "usr": "s:Si"
+                      },
+                      {
+                        "kind": "TypeNominal",
+                        "name": "SunellDeviceModel",
+                        "printedName": "SunellSDK.SunellDeviceModel",
+                        "usr": "c:objc(cs)SunellDeviceModel"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "declKind": "Func",
+            "usr": "c:@M@SunellSDK@objc(cs)SunellSDK(cm)connectDevByP2PWithUuid:port:user:pwd:resultBlock:",
+            "mangledName": "$s9SunellSDK0A8SDKEntryC15connectDevByP2P4uuid4port4user3pwd11resultBlockySS_SiS2SySi_So0A11DeviceModelCtctFZ",
+            "moduleName": "SunellSDK",
+            "static": true,
+            "declAttributes": [
+              "Final",
+              "AccessControl",
+              "ObjC"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "connectDevByIP",
+            "printedName": "connectDevByIP(ip:port:user:pwd:resultBlock:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Int",
+                "printedName": "Swift.Int",
+                "usr": "s:Si"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              },
+              {
+                "kind": "TypeFunc",
+                "name": "Function",
+                "printedName": "(Swift.Int, SunellSDK.SunellDeviceModel) -> ()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Tuple",
+                    "printedName": "(Swift.Int, SunellSDK.SunellDeviceModel)",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Int",
+                        "printedName": "Swift.Int",
+                        "usr": "s:Si"
+                      },
+                      {
+                        "kind": "TypeNominal",
+                        "name": "SunellDeviceModel",
+                        "printedName": "SunellSDK.SunellDeviceModel",
+                        "usr": "c:objc(cs)SunellDeviceModel"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "declKind": "Func",
+            "usr": "c:@M@SunellSDK@objc(cs)SunellSDK(cm)connectDevByIPWithIp:port:user:pwd:resultBlock:",
+            "mangledName": "$s9SunellSDK0A8SDKEntryC14connectDevByIP2ip4port4user3pwd11resultBlockySS_SiS2SySi_So0A11DeviceModelCtctFZ",
+            "moduleName": "SunellSDK",
+            "static": true,
+            "declAttributes": [
+              "Final",
+              "AccessControl",
+              "ObjC"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "disConnectDev",
+            "printedName": "disConnectDev(deviceId:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "c:@M@SunellSDK@objc(cs)SunellSDK(cm)disConnectDevWithDeviceId:",
+            "mangledName": "$s9SunellSDK0A8SDKEntryC13disConnectDev8deviceIdySS_tFZ",
+            "moduleName": "SunellSDK",
+            "static": true,
+            "declAttributes": [
+              "Final",
+              "AccessControl",
+              "ObjC"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "liveStart",
+            "printedName": "liveStart(deviceId:channelId:streamType:isHw:caLayer:resultBlock:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Int",
+                "printedName": "Swift.Int",
+                "usr": "s:Si"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Int",
+                "printedName": "Swift.Int",
+                "usr": "s:Si"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Bool",
+                "printedName": "Swift.Bool",
+                "usr": "s:Sb"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "CAEAGLLayer",
+                "printedName": "QuartzCore.CAEAGLLayer",
+                "usr": "c:objc(cs)CAEAGLLayer"
+              },
+              {
+                "kind": "TypeFunc",
+                "name": "Function",
+                "printedName": "(Swift.Int) -> ()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Int",
+                    "printedName": "Swift.Int",
+                    "usr": "s:Si"
+                  }
+                ]
+              }
+            ],
+            "declKind": "Func",
+            "usr": "c:@M@SunellSDK@objc(cs)SunellSDK(cm)liveStartWithDeviceId:channelId:streamType:isHw:caLayer:resultBlock:",
+            "mangledName": "$s9SunellSDK0A8SDKEntryC9liveStart8deviceId07channelG010streamType4isHw7caLayer11resultBlockySS_S2iSbSo11CAEAGLLayerCySictFZ",
+            "moduleName": "SunellSDK",
+            "static": true,
+            "declAttributes": [
+              "Final",
+              "AccessControl",
+              "RawDocComment",
+              "ObjC"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "liveStop",
+            "printedName": "liveStop(deviceId:channelId:resultBlock:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Int",
+                "printedName": "Swift.Int",
+                "usr": "s:Si"
+              },
+              {
+                "kind": "TypeFunc",
+                "name": "Function",
+                "printedName": "(Swift.Int) -> ()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Int",
+                    "printedName": "Swift.Int",
+                    "usr": "s:Si"
+                  }
+                ]
+              }
+            ],
+            "declKind": "Func",
+            "usr": "c:@M@SunellSDK@objc(cs)SunellSDK(cm)liveStopWithDeviceId:channelId:resultBlock:",
+            "mangledName": "$s9SunellSDK0A8SDKEntryC8liveStop8deviceId07channelG011resultBlockySS_SiySictFZ",
+            "moduleName": "SunellSDK",
+            "static": true,
+            "declAttributes": [
+              "Final",
+              "AccessControl",
+              "ObjC"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "captureImageWithDeviceId",
+            "printedName": "captureImageWithDeviceId(deviceId:channelId:path:resultBlock:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Int",
+                "printedName": "Swift.Int",
+                "usr": "s:Si"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              },
+              {
+                "kind": "TypeFunc",
+                "name": "Function",
+                "printedName": "(Swift.Int) -> ()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Int",
+                    "printedName": "Swift.Int",
+                    "usr": "s:Si"
+                  }
+                ]
+              }
+            ],
+            "declKind": "Func",
+            "usr": "c:@M@SunellSDK@objc(cs)SunellSDK(cm)captureImageWithDeviceIdWithDeviceId:channelId:path:resultBlock:",
+            "mangledName": "$s9SunellSDK0A8SDKEntryC24captureImageWithDeviceId06deviceH007channelH04path11resultBlockySS_SiSSySictFZ",
+            "moduleName": "SunellSDK",
+            "static": true,
+            "declAttributes": [
+              "Final",
+              "AccessControl",
+              "ObjC"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "audioSwitchWithDeviceId",
+            "printedName": "audioSwitchWithDeviceId(deviceId:channelId:isOpen:resultBlock:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Int",
+                "printedName": "Swift.Int",
+                "usr": "s:Si"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Bool",
+                "printedName": "Swift.Bool",
+                "usr": "s:Sb"
+              },
+              {
+                "kind": "TypeFunc",
+                "name": "Function",
+                "printedName": "(Swift.Int) -> ()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Int",
+                    "printedName": "Swift.Int",
+                    "usr": "s:Si"
+                  }
+                ]
+              }
+            ],
+            "declKind": "Func",
+            "usr": "c:@M@SunellSDK@objc(cs)SunellSDK(cm)audioSwitchWithDeviceIdWithDeviceId:channelId:isOpen:resultBlock:",
+            "mangledName": "$s9SunellSDK0A8SDKEntryC23audioSwitchWithDeviceId06deviceH007channelH06isOpen11resultBlockySS_SiSbySictFZ",
+            "moduleName": "SunellSDK",
+            "static": true,
+            "declAttributes": [
+              "Final",
+              "AccessControl",
+              "ObjC"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "talkSwitchWithDeviceId",
+            "printedName": "talkSwitchWithDeviceId(deviceId:channelId:isOpen:resultBlock:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Int",
+                "printedName": "Swift.Int",
+                "usr": "s:Si"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Bool",
+                "printedName": "Swift.Bool",
+                "usr": "s:Sb"
+              },
+              {
+                "kind": "TypeFunc",
+                "name": "Function",
+                "printedName": "(Swift.Int) -> ()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Int",
+                    "printedName": "Swift.Int",
+                    "usr": "s:Si"
+                  }
+                ]
+              }
+            ],
+            "declKind": "Func",
+            "usr": "c:@M@SunellSDK@objc(cs)SunellSDK(cm)talkSwitchWithDeviceIdWithDeviceId:channelId:isOpen:resultBlock:",
+            "mangledName": "$s9SunellSDK0A8SDKEntryC22talkSwitchWithDeviceId06deviceH007channelH06isOpen11resultBlockySS_SiSbySictFZ",
+            "moduleName": "SunellSDK",
+            "static": true,
+            "declAttributes": [
+              "Final",
+              "AccessControl",
+              "ObjC"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "qualityAdjustmentWithDeviceId",
+            "printedName": "qualityAdjustmentWithDeviceId(deviceId:channelId:qualityType:resultBlock:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Int",
+                "printedName": "Swift.Int",
+                "usr": "s:Si"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Int",
+                "printedName": "Swift.Int",
+                "usr": "s:Si"
+              },
+              {
+                "kind": "TypeFunc",
+                "name": "Function",
+                "printedName": "(Swift.Int) -> ()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Int",
+                    "printedName": "Swift.Int",
+                    "usr": "s:Si"
+                  }
+                ]
+              }
+            ],
+            "declKind": "Func",
+            "usr": "c:@M@SunellSDK@objc(cs)SunellSDK(cm)qualityAdjustmentWithDeviceIdWithDeviceId:channelId:qualityType:resultBlock:",
+            "mangledName": "$s9SunellSDK0A8SDKEntryC29qualityAdjustmentWithDeviceId06deviceH007channelH00D4Type11resultBlockySS_S2iySictFZ",
+            "moduleName": "SunellSDK",
+            "static": true,
+            "declAttributes": [
+              "Final",
+              "AccessControl",
+              "ObjC"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "getDeviceCapacityWithDeviceId",
+            "printedName": "getDeviceCapacityWithDeviceId(deviceId:channelId:resultBlock:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Int",
+                "printedName": "Swift.Int",
+                "usr": "s:Si"
+              },
+              {
+                "kind": "TypeFunc",
+                "name": "Function",
+                "printedName": "(Swift.Int, SunellSDK.SunellChannelModel?) -> ()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Tuple",
+                    "printedName": "(Swift.Int, SunellSDK.SunellChannelModel?)",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Int",
+                        "printedName": "Swift.Int",
+                        "usr": "s:Si"
+                      },
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Optional",
+                        "printedName": "SunellSDK.SunellChannelModel?",
+                        "children": [
+                          {
+                            "kind": "TypeNominal",
+                            "name": "SunellChannelModel",
+                            "printedName": "SunellSDK.SunellChannelModel",
+                            "usr": "c:objc(cs)SunellChannelModel"
+                          }
+                        ],
+                        "usr": "s:Sq"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "declKind": "Func",
+            "usr": "c:@M@SunellSDK@objc(cs)SunellSDK(cm)getDeviceCapacityWithDeviceIdWithDeviceId:channelId:resultBlock:",
+            "mangledName": "$s9SunellSDK0A8SDKEntryC021getDeviceCapacityWithE2Id06deviceH007channelH011resultBlockySS_SiySi_So0A12ChannelModelCSgtctFZ",
+            "moduleName": "SunellSDK",
+            "static": true,
+            "declAttributes": [
+              "Final",
+              "AccessControl",
+              "ObjC"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "openPTZWithDeivceId",
+            "printedName": "openPTZWithDeivceId(deviceId:channelId:resultBlock:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Int",
+                "printedName": "Swift.Int",
+                "usr": "s:Si"
+              },
+              {
+                "kind": "TypeFunc",
+                "name": "Function",
+                "printedName": "(Swift.Int) -> ()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Int",
+                    "printedName": "Swift.Int",
+                    "usr": "s:Si"
+                  }
+                ]
+              }
+            ],
+            "declKind": "Func",
+            "usr": "c:@M@SunellSDK@objc(cs)SunellSDK(cm)openPTZWithDeivceIdWithDeviceId:channelId:resultBlock:",
+            "mangledName": "$s9SunellSDK0A8SDKEntryC19openPTZWithDeivceId06deviceG007channelG011resultBlockySS_SiySictFZ",
+            "moduleName": "SunellSDK",
+            "static": true,
+            "declAttributes": [
+              "Final",
+              "AccessControl",
+              "ObjC"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "closePTZWithDeviceId",
+            "printedName": "closePTZWithDeviceId(deviceId:channelId:resultBlock:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Int",
+                "printedName": "Swift.Int",
+                "usr": "s:Si"
+              },
+              {
+                "kind": "TypeFunc",
+                "name": "Function",
+                "printedName": "(Swift.Int) -> ()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Int",
+                    "printedName": "Swift.Int",
+                    "usr": "s:Si"
+                  }
+                ]
+              }
+            ],
+            "declKind": "Func",
+            "usr": "c:@M@SunellSDK@objc(cs)SunellSDK(cm)closePTZWithDeviceIdWithDeviceId:channelId:resultBlock:",
+            "mangledName": "$s9SunellSDK0A8SDKEntryC20closePTZWithDeviceId06deviceG007channelG011resultBlockySS_SiySictFZ",
+            "moduleName": "SunellSDK",
+            "static": true,
+            "declAttributes": [
+              "Final",
+              "AccessControl",
+              "ObjC"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "operationPTZWithDeviceId",
+            "printedName": "operationPTZWithDeviceId(deviceId:channelId:arrowType:resultBlock:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Int",
+                "printedName": "Swift.Int",
+                "usr": "s:Si"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Int",
+                "printedName": "Swift.Int",
+                "usr": "s:Si"
+              },
+              {
+                "kind": "TypeFunc",
+                "name": "Function",
+                "printedName": "(Swift.Int) -> ()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Int",
+                    "printedName": "Swift.Int",
+                    "usr": "s:Si"
+                  }
+                ]
+              }
+            ],
+            "declKind": "Func",
+            "usr": "c:@M@SunellSDK@objc(cs)SunellSDK(cm)operationPTZWithDeviceIdWithDeviceId:channelId:arrowType:resultBlock:",
+            "mangledName": "$s9SunellSDK0A8SDKEntryC24operationPTZWithDeviceId06deviceG007channelG09arrowType11resultBlockySS_S2iySictFZ",
+            "moduleName": "SunellSDK",
+            "static": true,
+            "declAttributes": [
+              "Final",
+              "AccessControl",
+              "ObjC"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "stopPTZWithDeviceId",
+            "printedName": "stopPTZWithDeviceId(deviceId:channelId:resultBlock:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Int",
+                "printedName": "Swift.Int",
+                "usr": "s:Si"
+              },
+              {
+                "kind": "TypeFunc",
+                "name": "Function",
+                "printedName": "(Swift.Int) -> ()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Int",
+                    "printedName": "Swift.Int",
+                    "usr": "s:Si"
+                  }
+                ]
+              }
+            ],
+            "declKind": "Func",
+            "usr": "c:@M@SunellSDK@objc(cs)SunellSDK(cm)stopPTZWithDeviceIdWithDeviceId:channelId:resultBlock:",
+            "mangledName": "$s9SunellSDK0A8SDKEntryC19stopPTZWithDeviceId06deviceG007channelG011resultBlockySS_SiySictFZ",
+            "moduleName": "SunellSDK",
+            "static": true,
+            "declAttributes": [
+              "Final",
+              "AccessControl",
+              "ObjC"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "getWhiteLightAbilityWithDeviceId",
+            "printedName": "getWhiteLightAbilityWithDeviceId(deviceId:channelId:resultBlock:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Int",
+                "printedName": "Swift.Int",
+                "usr": "s:Si"
+              },
+              {
+                "kind": "TypeFunc",
+                "name": "Function",
+                "printedName": "(Swift.Int, Swift.String?) -> ()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Tuple",
+                    "printedName": "(Swift.Int, Swift.String?)",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Int",
+                        "printedName": "Swift.Int",
+                        "usr": "s:Si"
+                      },
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Optional",
+                        "printedName": "Swift.String?",
+                        "children": [
+                          {
+                            "kind": "TypeNominal",
+                            "name": "String",
+                            "printedName": "Swift.String",
+                            "usr": "s:SS"
+                          }
+                        ],
+                        "usr": "s:Sq"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "declKind": "Func",
+            "usr": "c:@M@SunellSDK@objc(cs)SunellSDK(cm)getWhiteLightAbilityWithDeviceIdWithDeviceId:channelId:resultBlock:",
+            "mangledName": "$s9SunellSDK0A8SDKEntryC32getWhiteLightAbilityWithDeviceId06deviceJ007channelJ011resultBlockySS_SiySi_SSSgtctFZ",
+            "moduleName": "SunellSDK",
+            "static": true,
+            "declAttributes": [
+              "Final",
+              "AccessControl",
+              "ObjC"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "getWhiteLightSwitchParamWithDeviceId",
+            "printedName": "getWhiteLightSwitchParamWithDeviceId(deviceId:channelId:resultBlock:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Int",
+                "printedName": "Swift.Int",
+                "usr": "s:Si"
+              },
+              {
+                "kind": "TypeFunc",
+                "name": "Function",
+                "printedName": "(Swift.Int, Swift.String?) -> ()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Tuple",
+                    "printedName": "(Swift.Int, Swift.String?)",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Int",
+                        "printedName": "Swift.Int",
+                        "usr": "s:Si"
+                      },
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Optional",
+                        "printedName": "Swift.String?",
+                        "children": [
+                          {
+                            "kind": "TypeNominal",
+                            "name": "String",
+                            "printedName": "Swift.String",
+                            "usr": "s:SS"
+                          }
+                        ],
+                        "usr": "s:Sq"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "declKind": "Func",
+            "usr": "c:@M@SunellSDK@objc(cs)SunellSDK(cm)getWhiteLightSwitchParamWithDeviceIdWithDeviceId:channelId:resultBlock:",
+            "mangledName": "$s9SunellSDK0A8SDKEntryC36getWhiteLightSwitchParamWithDeviceId06deviceK007channelK011resultBlockySS_SiySi_SSSgtctFZ",
+            "moduleName": "SunellSDK",
+            "static": true,
+            "declAttributes": [
+              "Final",
+              "AccessControl",
+              "ObjC"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "setWhiteLightSwitchParamWithDeviceId",
+            "printedName": "setWhiteLightSwitchParamWithDeviceId(deviceId:channelId:paramJson:resultBlock:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Int",
+                "printedName": "Swift.Int",
+                "usr": "s:Si"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              },
+              {
+                "kind": "TypeFunc",
+                "name": "Function",
+                "printedName": "(Swift.Int) -> ()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Int",
+                    "printedName": "Swift.Int",
+                    "usr": "s:Si"
+                  }
+                ]
+              }
+            ],
+            "declKind": "Func",
+            "usr": "c:@M@SunellSDK@objc(cs)SunellSDK(cm)setWhiteLightSwitchParamWithDeviceIdWithDeviceId:channelId:paramJson:resultBlock:",
+            "mangledName": "$s9SunellSDK0A8SDKEntryC36setWhiteLightSwitchParamWithDeviceId06deviceK007channelK09paramJson11resultBlockySS_SiSSySictFZ",
+            "moduleName": "SunellSDK",
+            "static": true,
+            "declAttributes": [
+              "Final",
+              "AccessControl",
+              "ObjC"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "getAudioAlarmInfoWithDeviceId",
+            "printedName": "getAudioAlarmInfoWithDeviceId(deviceId:channelId:resultBlock:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Int",
+                "printedName": "Swift.Int",
+                "usr": "s:Si"
+              },
+              {
+                "kind": "TypeFunc",
+                "name": "Function",
+                "printedName": "(Swift.Int, Swift.String?) -> ()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Tuple",
+                    "printedName": "(Swift.Int, Swift.String?)",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Int",
+                        "printedName": "Swift.Int",
+                        "usr": "s:Si"
+                      },
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Optional",
+                        "printedName": "Swift.String?",
+                        "children": [
+                          {
+                            "kind": "TypeNominal",
+                            "name": "String",
+                            "printedName": "Swift.String",
+                            "usr": "s:SS"
+                          }
+                        ],
+                        "usr": "s:Sq"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "declKind": "Func",
+            "usr": "c:@M@SunellSDK@objc(cs)SunellSDK(cm)getAudioAlarmInfoWithDeviceIdWithDeviceId:channelId:resultBlock:",
+            "mangledName": "$s9SunellSDK0A8SDKEntryC29getAudioAlarmInfoWithDeviceId06deviceJ007channelJ011resultBlockySS_SiySi_SSSgtctFZ",
+            "moduleName": "SunellSDK",
+            "static": true,
+            "declAttributes": [
+              "Final",
+              "AccessControl",
+              "ObjC"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "playAudioAlarmWithDeviceId",
+            "printedName": "playAudioAlarmWithDeviceId(deviceId:channelId:displayId:playNum:resultBlock:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Int",
+                "printedName": "Swift.Int",
+                "usr": "s:Si"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Int",
+                "printedName": "Swift.Int",
+                "usr": "s:Si"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Int",
+                "printedName": "Swift.Int",
+                "usr": "s:Si"
+              },
+              {
+                "kind": "TypeFunc",
+                "name": "Function",
+                "printedName": "(Swift.Int) -> ()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Int",
+                    "printedName": "Swift.Int",
+                    "usr": "s:Si"
+                  }
+                ]
+              }
+            ],
+            "declKind": "Func",
+            "usr": "c:@M@SunellSDK@objc(cs)SunellSDK(cm)playAudioAlarmWithDeviceIdWithDeviceId:channelId:displayId:playNum:resultBlock:",
+            "mangledName": "$s9SunellSDK0A8SDKEntryC26playAudioAlarmWithDeviceId06deviceI007channelI007displayI00D3Num11resultBlockySS_S3iySictFZ",
+            "moduleName": "SunellSDK",
+            "static": true,
+            "declAttributes": [
+              "Final",
+              "AccessControl",
+              "ObjC"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "playBackStartWithDeviceId",
+            "printedName": "playBackStartWithDeviceId(deviceId:channelId:startTimeStr:streamType:isHwDec:caLayer:resultBlock:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Int",
+                "printedName": "Swift.Int",
+                "usr": "s:Si"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Int",
+                "printedName": "Swift.Int",
+                "usr": "s:Si"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Bool",
+                "printedName": "Swift.Bool",
+                "usr": "s:Sb"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "CAEAGLLayer",
+                "printedName": "QuartzCore.CAEAGLLayer",
+                "usr": "c:objc(cs)CAEAGLLayer"
+              },
+              {
+                "kind": "TypeFunc",
+                "name": "Function",
+                "printedName": "(Swift.Int) -> ()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Int",
+                    "printedName": "Swift.Int",
+                    "usr": "s:Si"
+                  }
+                ]
+              }
+            ],
+            "declKind": "Func",
+            "usr": "c:@M@SunellSDK@objc(cs)SunellSDK(cm)playBackStartWithDeviceIdWithDeviceId:channelId:startTimeStr:streamType:isHwDec:caLayer:resultBlock:",
+            "mangledName": "$s9SunellSDK0A8SDKEntryC25playBackStartWithDeviceId06deviceI007channelI012startTimeStr10streamType7isHwDec7caLayer11resultBlockySS_SiSSSiSbSo11CAEAGLLayerCySictFZ",
+            "moduleName": "SunellSDK",
+            "static": true,
+            "declAttributes": [
+              "Final",
+              "AccessControl",
+              "ObjC"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "playBackStopWithDeviceId",
+            "printedName": "playBackStopWithDeviceId(deviceId:channelId:resultBlock:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Int",
+                "printedName": "Swift.Int",
+                "usr": "s:Si"
+              },
+              {
+                "kind": "TypeFunc",
+                "name": "Function",
+                "printedName": "(Swift.Int) -> ()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Int",
+                    "printedName": "Swift.Int",
+                    "usr": "s:Si"
+                  }
+                ]
+              }
+            ],
+            "declKind": "Func",
+            "usr": "c:@M@SunellSDK@objc(cs)SunellSDK(cm)playBackStopWithDeviceIdWithDeviceId:channelId:resultBlock:",
+            "mangledName": "$s9SunellSDK0A8SDKEntryC24playBackStopWithDeviceId06deviceI007channelI011resultBlockySS_SiySictFZ",
+            "moduleName": "SunellSDK",
+            "static": true,
+            "declAttributes": [
+              "Final",
+              "AccessControl",
+              "ObjC"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "playBackPauseWithDeviceId",
+            "printedName": "playBackPauseWithDeviceId(deviceId:channelId:resultBlock:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Int",
+                "printedName": "Swift.Int",
+                "usr": "s:Si"
+              },
+              {
+                "kind": "TypeFunc",
+                "name": "Function",
+                "printedName": "(Swift.Int) -> ()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Int",
+                    "printedName": "Swift.Int",
+                    "usr": "s:Si"
+                  }
+                ]
+              }
+            ],
+            "declKind": "Func",
+            "usr": "c:@M@SunellSDK@objc(cs)SunellSDK(cm)playBackPauseWithDeviceIdWithDeviceId:channelId:resultBlock:",
+            "mangledName": "$s9SunellSDK0A8SDKEntryC25playBackPauseWithDeviceId06deviceI007channelI011resultBlockySS_SiySictFZ",
+            "moduleName": "SunellSDK",
+            "static": true,
+            "declAttributes": [
+              "Final",
+              "AccessControl",
+              "ObjC"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "playBackResumeWithDeviceId",
+            "printedName": "playBackResumeWithDeviceId(deviceId:channelId:resultBlock:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Int",
+                "printedName": "Swift.Int",
+                "usr": "s:Si"
+              },
+              {
+                "kind": "TypeFunc",
+                "name": "Function",
+                "printedName": "(Swift.Int) -> ()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Int",
+                    "printedName": "Swift.Int",
+                    "usr": "s:Si"
+                  }
+                ]
+              }
+            ],
+            "declKind": "Func",
+            "usr": "c:@M@SunellSDK@objc(cs)SunellSDK(cm)playBackResumeWithDeviceIdWithDeviceId:channelId:resultBlock:",
+            "mangledName": "$s9SunellSDK0A8SDKEntryC26playBackResumeWithDeviceId06deviceI007channelI011resultBlockySS_SiySictFZ",
+            "moduleName": "SunellSDK",
+            "static": true,
+            "declAttributes": [
+              "Final",
+              "AccessControl",
+              "ObjC"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "playBackSeekWithDeviceId",
+            "printedName": "playBackSeekWithDeviceId(deviceId:channelId:timeStr:resultBlock:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Int",
+                "printedName": "Swift.Int",
+                "usr": "s:Si"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              },
+              {
+                "kind": "TypeFunc",
+                "name": "Function",
+                "printedName": "(Swift.Int) -> ()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Int",
+                    "printedName": "Swift.Int",
+                    "usr": "s:Si"
+                  }
+                ]
+              }
+            ],
+            "declKind": "Func",
+            "usr": "c:@M@SunellSDK@objc(cs)SunellSDK(cm)playBackSeekWithDeviceIdWithDeviceId:channelId:timeStr:resultBlock:",
+            "mangledName": "$s9SunellSDK0A8SDKEntryC24playBackSeekWithDeviceId06deviceI007channelI07timeStr11resultBlockySS_SiSSySictFZ",
+            "moduleName": "SunellSDK",
+            "static": true,
+            "declAttributes": [
+              "Final",
+              "AccessControl",
+              "ObjC"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "getPlayBackOneDayRecordListWithDeviceId",
+            "printedName": "getPlayBackOneDayRecordListWithDeviceId(deviceId:channelId:dayStr:resultBlock:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Int",
+                "printedName": "Swift.Int",
+                "usr": "s:Si"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              },
+              {
+                "kind": "TypeFunc",
+                "name": "Function",
+                "printedName": "(Swift.Int, Swift.String) -> ()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Tuple",
+                    "printedName": "(Swift.Int, Swift.String)",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Int",
+                        "printedName": "Swift.Int",
+                        "usr": "s:Si"
+                      },
+                      {
+                        "kind": "TypeNominal",
+                        "name": "String",
+                        "printedName": "Swift.String",
+                        "usr": "s:SS"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "declKind": "Func",
+            "usr": "c:@M@SunellSDK@objc(cs)SunellSDK(cm)getPlayBackOneDayRecordListWithDeviceIdWithDeviceId:channelId:dayStr:resultBlock:",
+            "mangledName": "$s9SunellSDK0A8SDKEntryC39getPlayBackOneDayRecordListWithDeviceId06deviceM007channelM06dayStr11resultBlockySS_SiSSySi_SStctFZ",
+            "moduleName": "SunellSDK",
+            "static": true,
+            "declAttributes": [
+              "Final",
+              "AccessControl",
+              "ObjC"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "getPlayBackRecordWithinACertainPeriodOfTimeWithDeviceId",
+            "printedName": "getPlayBackRecordWithinACertainPeriodOfTimeWithDeviceId(deviceId:channelId:startDateStr:endDateStr:resultBlock:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Int",
+                "printedName": "Swift.Int",
+                "usr": "s:Si"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              },
+              {
+                "kind": "TypeFunc",
+                "name": "Function",
+                "printedName": "(Swift.Int, Swift.String) -> ()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Tuple",
+                    "printedName": "(Swift.Int, Swift.String)",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Int",
+                        "printedName": "Swift.Int",
+                        "usr": "s:Si"
+                      },
+                      {
+                        "kind": "TypeNominal",
+                        "name": "String",
+                        "printedName": "Swift.String",
+                        "usr": "s:SS"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "declKind": "Func",
+            "usr": "c:@M@SunellSDK@objc(cs)SunellSDK(cm)getPlayBackRecordWithinACertainPeriodOfTimeWithDeviceIdWithDeviceId:channelId:startDateStr:endDateStr:resultBlock:",
+            "mangledName": "$s9SunellSDK0A8SDKEntryC55getPlayBackRecordWithinACertainPeriodOfTimeWithDeviceId06deviceO007channelO012startDateStr03endsT011resultBlockySS_SiS2SySi_SStctFZ",
+            "moduleName": "SunellSDK",
+            "static": true,
+            "declAttributes": [
+              "Final",
+              "AccessControl",
+              "ObjC"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "getWhichDaysWithinTheTimePeriodHavePlaybackRecordsWithDeviceId",
+            "printedName": "getWhichDaysWithinTheTimePeriodHavePlaybackRecordsWithDeviceId(deviceId:channelId:startDayStr:endDayStr:resultBlock:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Int",
+                "printedName": "Swift.Int",
+                "usr": "s:Si"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              },
+              {
+                "kind": "TypeFunc",
+                "name": "Function",
+                "printedName": "(Swift.Int, Swift.String) -> ()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Tuple",
+                    "printedName": "(Swift.Int, Swift.String)",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Int",
+                        "printedName": "Swift.Int",
+                        "usr": "s:Si"
+                      },
+                      {
+                        "kind": "TypeNominal",
+                        "name": "String",
+                        "printedName": "Swift.String",
+                        "usr": "s:SS"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "declKind": "Func",
+            "usr": "c:@M@SunellSDK@objc(cs)SunellSDK(cm)getWhichDaysWithinTheTimePeriodHavePlaybackRecordsWithDeviceIdWithDeviceId:channelId:startDayStr:endDayStr:resultBlock:",
+            "mangledName": "$s9SunellSDK0A8SDKEntryC62getWhichDaysWithinTheTimePeriodHavePlaybackRecordsWithDeviceId06deviceP007channelP011startDayStr03endtU011resultBlockySS_SiS2SySi_SStctFZ",
+            "moduleName": "SunellSDK",
+            "static": true,
+            "declAttributes": [
+              "Final",
+              "AccessControl",
+              "ObjC"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "playBackSetSpeedWithDeviceId",
+            "printedName": "playBackSetSpeedWithDeviceId(deviceId:channelId:speed:resultBlock:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Int",
+                "printedName": "Swift.Int",
+                "usr": "s:Si"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "SunellPlaybackSpeed",
+                "printedName": "SunellSDK.SunellPlaybackSpeed",
+                "usr": "s:9SunellSDK0A13PlaybackSpeedO"
+              },
+              {
+                "kind": "TypeFunc",
+                "name": "Function",
+                "printedName": "(Swift.Int) -> ()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Int",
+                    "printedName": "Swift.Int",
+                    "usr": "s:Si"
+                  }
+                ]
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:9SunellSDK0A8SDKEntryC28playBackSetSpeedWithDeviceId06deviceJ007channelJ05speed11resultBlockySS_SiAA0a8PlaybackG0OySictFZ",
+            "mangledName": "$s9SunellSDK0A8SDKEntryC28playBackSetSpeedWithDeviceId06deviceJ007channelJ05speed11resultBlockySS_SiAA0a8PlaybackG0OySictFZ",
+            "moduleName": "SunellSDK",
+            "static": true,
+            "declAttributes": [
+              "Final",
+              "AccessControl"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "startDeviceChannelAlarmMonitoring",
+            "printedName": "startDeviceChannelAlarmMonitoring(deviceId:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "c:@M@SunellSDK@objc(cs)SunellSDK(cm)startDeviceChannelAlarmMonitoringWithDeviceId:",
+            "mangledName": "$s9SunellSDK0A8SDKEntryC33startDeviceChannelAlarmMonitoring8deviceIdySS_tFZ",
+            "moduleName": "SunellSDK",
+            "static": true,
+            "declAttributes": [
+              "Final",
+              "AccessControl",
+              "RawDocComment",
+              "ObjC"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "stopDeviceChannelAlarmMonitoring",
+            "printedName": "stopDeviceChannelAlarmMonitoring(deviceId:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "c:@M@SunellSDK@objc(cs)SunellSDK(cm)stopDeviceChannelAlarmMonitoringWithDeviceId:",
+            "mangledName": "$s9SunellSDK0A8SDKEntryC32stopDeviceChannelAlarmMonitoring8deviceIdySS_tFZ",
+            "moduleName": "SunellSDK",
+            "static": true,
+            "declAttributes": [
+              "Final",
+              "AccessControl",
+              "ObjC"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "closeGL",
+            "printedName": "closeGL()",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "c:@M@SunellSDK@objc(cs)SunellSDK(cm)closeGL",
+            "mangledName": "$s9SunellSDK0A8SDKEntryC7closeGLyyFZ",
+            "moduleName": "SunellSDK",
+            "static": true,
+            "declAttributes": [
+              "Final",
+              "AccessControl",
+              "ObjC"
+            ],
+            "funcSelfKind": "NonMutating"
+          }
+        ],
+        "declKind": "Class",
+        "usr": "c:@M@SunellSDK@objc(cs)SunellSDK",
+        "mangledName": "$s9SunellSDK0A8SDKEntryC",
+        "moduleName": "SunellSDK",
+        "objc_name": "SunellSDK",
+        "declAttributes": [
+          "AccessControl",
+          "ObjCMembers",
+          "ObjC"
+        ],
+        "superclassUsr": "c:objc(cs)NSObject",
+        "hasMissingDesignatedInitializers": true,
+        "inheritsConvenienceInitializers": true,
+        "superclassNames": [
+          "ObjectiveC.NSObject"
+        ],
+        "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Equatable",
+            "printedName": "Equatable",
+            "usr": "s:SQ",
+            "mangledName": "$sSQ"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Hashable",
+            "printedName": "Hashable",
+            "usr": "s:SH",
+            "mangledName": "$sSH"
+          },
+          {
+            "kind": "Conformance",
+            "name": "CVarArg",
+            "printedName": "CVarArg",
+            "usr": "s:s7CVarArgP",
+            "mangledName": "$ss7CVarArgP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "_KeyValueCodingAndObservingPublishing",
+            "printedName": "_KeyValueCodingAndObservingPublishing",
+            "usr": "s:10Foundation37_KeyValueCodingAndObservingPublishingP",
+            "mangledName": "$s10Foundation37_KeyValueCodingAndObservingPublishingP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "_KeyValueCodingAndObserving",
+            "printedName": "_KeyValueCodingAndObserving",
+            "usr": "s:10Foundation27_KeyValueCodingAndObservingP",
+            "mangledName": "$s10Foundation27_KeyValueCodingAndObservingP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "CustomStringConvertible",
+            "printedName": "CustomStringConvertible",
+            "usr": "s:s23CustomStringConvertibleP",
+            "mangledName": "$ss23CustomStringConvertibleP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "CustomDebugStringConvertible",
+            "printedName": "CustomDebugStringConvertible",
+            "usr": "s:s28CustomDebugStringConvertibleP",
+            "mangledName": "$ss28CustomDebugStringConvertibleP"
+          }
+        ]
+      }
+    ],
+    "json_format_version": 8
+  },
+  "ConstValues": [
+    {
+      "filePath": "\/Users\/sunell\/Desktop\/jfProjects\/AU03\/SDK0323\/SunellSDK\/SunellSDK\/SunellSDK.swift",
+      "kind": "IntegerLiteral",
+      "offset": 331,
+      "length": 1,
+      "value": "1"
+    },
+    {
+      "filePath": "\/Users\/sunell\/Desktop\/jfProjects\/AU03\/SDK0323\/SunellSDK\/SunellSDK\/SunellSDK.swift",
+      "kind": "IntegerLiteral",
+      "offset": 359,
+      "length": 1,
+      "value": "2"
+    },
+    {
+      "filePath": "\/Users\/sunell\/Desktop\/jfProjects\/AU03\/SDK0323\/SunellSDK\/SunellSDK\/SunellSDK.swift",
+      "kind": "IntegerLiteral",
+      "offset": 439,
+      "length": 1,
+      "value": "0"
+    },
+    {
+      "filePath": "\/Users\/sunell\/Desktop\/jfProjects\/AU03\/SDK0323\/SunellSDK\/SunellSDK\/SunellSDK.swift",
+      "kind": "IntegerLiteral",
+      "offset": 459,
+      "length": 1,
+      "value": "1"
+    },
+    {
+      "filePath": "\/Users\/sunell\/Desktop\/jfProjects\/AU03\/SDK0323\/SunellSDK\/SunellSDK\/SunellSDK.swift",
+      "kind": "IntegerLiteral",
+      "offset": 480,
+      "length": 1,
+      "value": "2"
+    }
+  ]
+}

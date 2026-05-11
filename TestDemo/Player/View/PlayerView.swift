@@ -14,13 +14,36 @@ class PlayerView: UIView {
 
     var device: SunellDeviceModel {
         didSet {
-            rebuildChannelCells()
+            // Connection/capability callbacks often replace the model instance while deviceId/channel count stay unchanged; rebuilding every time can tear down active `CAEAGLLayer`, causing many `PlayerViewCell` deinit calls or even GL crashes.
+            let sameDevice = (oldValue.deviceId as String) == (device.deviceId as String)
+            let sameLayout = sameDevice
+                && Self.derivedCellCount(for: oldValue) == Self.derivedCellCount(for: device)
+            if sameLayout {
+                return
+            }
+            requestRebuildChannelCells()
         }
     }
 
+    /// Uses the same rules as `rebuildChannelCells` to decide whether physical cell rebuild is required.
+    private static func derivedCellCount(for d: SunellDeviceModel) -> Int {
+        let raw = max(0, Int(d.chnNum))
+        return raw == 0 ? 1 : raw
+    }
+
     var bgScrollView = UIScrollView()
-    /// 与通道一一对应的 `PlayerViewCell`，下标与通道序号对应（0..<chnNum）。
+    /// One `PlayerViewCell` per channel; index matches channel order (0..<chnNum).
     private(set) var cellArray: [PlayerViewCell] = []
+
+    /// Callback hook before physical cell rebuild: business side (`LivePlayerPage`) must
+    /// synchronously detach current `glLayer` and start `liveStop` + `closeGL`; call `proceed()` in callback
+    /// before actual rebuild. This avoids crashes when SDK render_thread still holds old `CAEAGLLayer` pointers
+    /// while cells are deallocated, which can crash in `LayerAnimation::unref`.
+    /// Parameter `proceed`: business side must call once on main thread after SDK stream stop completes.
+    var willRebuildCells: ((_ proceed: @escaping () -> Void) -> Void)?
+    /// Prevent reentry when `device.didSet` triggers again during async hook processing.
+    private var isRebuildingCells = false
+    private var pendingRebuildAfterCurrent = false
 
     init(frame: CGRect, device: SunellDeviceModel) {
         self.device = device
@@ -38,30 +61,71 @@ class PlayerView: UIView {
         bgScrollView.showsHorizontalScrollIndicator = true
         bgScrollView.bounces = true
         addSubview(bgScrollView)
-        rebuildChannelCells()
+        // During initialization there is no active `liveStart`, so synchronous rebuild is safe (and `willRebuildCells` is not registered yet).
+        doRebuildChannelCells()
     }
 
-    /// 单页宽度：与可视区域一致（全屏播放器时等于屏宽）；`layout` 前回退到主屏宽度。
+    /// Page width matches visible width (fullscreen: screen width); before layout falls back to main screen width.
     private var pageWidth: CGFloat {
         let w = bounds.width
         return w > 0 ? w : UIScreen.main.bounds.width
     }
 
-    /// 当前横向分页下标，与 `cellArray` 下标一致。
+    /// Current horizontal page index; same as `cellArray` index.
     func currentPageIndex() -> Int {
         let w = pageWidth
         guard w > 0 else { return 0 }
         return Int(round(bgScrollView.contentOffset.x / w))
     }
 
-    /// 根据当前 `device.chnNum` 创建 `PlayerViewCell`，写入 `cellArray` 并铺满横向滚动区域。
-    private func rebuildChannelCells() {
+    /// Regenerate cells from current `device` (for example after connect fills `devType`/`chnNum`) to keep in sync with `LivePlayerPage.device`.
+    /// Use `requestRebuildChannelCells` so business side can run `liveStop` + `closeGL` before discarding old `glLayer`.
+    func reloadChannelCellsFromDevice() {
+        requestRebuildChannelCells()
+    }
+
+    /// Entry point: attempt to rebuild cells. If `willRebuildCells` is registered, it **must call `proceed()`** before actual
+    /// view teardown; otherwise it falls back to synchronous rebuild (for initialization before `liveStart`).
+    private func requestRebuildChannelCells() {
+        guard !isRebuildingCells else {
+            // Rebuild was triggered again while hook was processing asynchronously; mark and rerun after current cycle finishes.
+            pendingRebuildAfterCurrent = true
+            return
+        }
+        guard let willRebuildCells else {
+            doRebuildChannelCells()
+            return
+        }
+        isRebuildingCells = true
+        willRebuildCells { [weak self] in
+            guard let self else { return }
+            self.doRebuildChannelCells()
+            self.isRebuildingCells = false
+            if self.pendingRebuildAfterCurrent {
+                self.pendingRebuildAfterCurrent = false
+                self.requestRebuildChannelCells()
+            }
+        }
+    }
+
+    /// Build `PlayerViewCell` instances from `device.chnNum`, fill `cellArray`, size horizontal scroll.
+    /// Callers (except initialization) must ensure SDK live / GL consumer is already stopped, otherwise SDK may hold
+    /// a dangling `CAEAGLLayer` pointer.
+    private func doRebuildChannelCells() {
+        // Same as teardown: disable implicit animations and explicitly detach each `glLayer` before `removeFromSuperview`.
+        CATransaction.begin()
+        CATransaction.setDisableActions(true)
+        for cell in cellArray {
+            cell.glLayer.contents = nil
+            cell.glLayer.removeFromSuperlayer()
+        }
         for sub in bgScrollView.subviews {
             sub.removeFromSuperview()
         }
+        CATransaction.commit()
         cellArray.removeAll(keepingCapacity: true)
 
-        let count = max(0, Int(device.chnNum))
+        let count = Self.derivedCellCount(for: device)
         let w = pageWidth
         let h = max(bgScrollView.bounds.height, bounds.height, 1)
 
@@ -79,7 +143,7 @@ class PlayerView: UIView {
         let n = cellArray.count
         let totalW = w * CGFloat(n)
         bgScrollView.contentSize = CGSize(width: totalW, height: pageHeight)
-        // 仅当可视宽度与单页宽度一致时系统分页才对齐
+        // Paging aligns only when visible width equals page width.
         bgScrollView.isPagingEnabled = abs(bgScrollView.bounds.width - w) < 0.5
     }
     

@@ -7,8 +7,8 @@
 
 import Foundation
 
-/// 本地化字符串封装，只需传入 key 即可
-/// Localizable.strings 中所有 key 以 TK_ 开头
+/// Thin wrapper for `NSLocalizedString`; pass the key only.
+/// Keys in Localizable.strings use the `TK_` prefix.
 func TKLocalizedString(_ key: String) -> String {
     return NSLocalizedString(key, comment: "")
 }

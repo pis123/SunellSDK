@@ -160,7 +160,7 @@ class ViewController: UIViewController {
     }
 
     func TestSDK() {
-        // SDK 调试入口
+        // SDK debug hook.
     }
 }
 
@@ -177,7 +177,7 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate {
         cell.configure(
             name: Self.displayName(for: device),
             channelCount: Self.channelCount(for: device),
-            isOnline: device.status == 1
+            isOnline: device.status.rawValue == 1
         )
         return cell
     }
@@ -192,7 +192,7 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let device = devices[indexPath.row]
         let uuid = device.deviceUUID
-        // 断开连接
+        // Disconnect (SDK session).
         SunellSDKEntry.disConnectDev(deviceId: device.deviceId)
         let delete = UIContextualAction(style: .destructive, title: TKLocalizedString("TK_Delete")) { _, _, done in
             if !uuid.isEmpty {

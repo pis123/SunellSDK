@@ -236,7 +236,7 @@ class P2PDevicePage: UIViewController {
     }
 
     @objc private func saveButtonTapped() {
-        // 保存按钮事件预留
+        // Save action: reserved.
     }
 }
 

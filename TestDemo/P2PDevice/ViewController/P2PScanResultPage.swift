@@ -62,7 +62,7 @@ class P2PScanResultPage: UIViewController {
 
     private func setupValues() {
         qrCodeTextField.text = scanResult.qrCode
-        // 端口、用户名、密码由用户手动输入，不预填
+        // Port, user, password are entered manually (not prefilled).
     }
 
     private func setupNavigationBar() {

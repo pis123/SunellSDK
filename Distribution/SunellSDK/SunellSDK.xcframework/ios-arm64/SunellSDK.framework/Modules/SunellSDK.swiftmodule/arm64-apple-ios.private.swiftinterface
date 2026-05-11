@@ -1,0 +1,110 @@
+// swift-interface-format-version: 1.0
+// swift-compiler-version: Apple Swift version 6.2 effective-5.10 (swiftlang-6.2.0.19.9 clang-1700.3.19.1)
+// swift-module-flags: -target arm64-apple-ios13.0 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -enable-upcoming-feature DisableOutwardActorInference -enable-upcoming-feature InferSendableFromCaptures -enable-upcoming-feature GlobalActorIsolatedTypesUsability -enable-upcoming-feature MemberImportVisibility -enable-upcoming-feature InferIsolatedConformances -enable-upcoming-feature NonisolatedNonsendingByDefault -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -module-name SunellSDK
+// swift-module-flags-ignorable:  -formal-cxx-interoperability-mode=off -interface-compiler-version 6.2
+import Foundation
+@_exported import SunellSDK
+import Swift
+import UIKit
+import _Concurrency
+import _StringProcessing
+import _SwiftConcurrencyShims
+public enum SunellPlaybackSpeed : Swift.Int, Swift.CaseIterable {
+  case x1
+  case x2
+  #if compiler(>=5.3) && $NonescapableTypes
+  public init?(rawValue: Swift.Int)
+  #endif
+  public typealias AllCases = [SunellSDK.SunellPlaybackSpeed]
+  public typealias RawValue = Swift.Int
+  nonisolated public static var allCases: [SunellSDK.SunellPlaybackSpeed] {
+    get
+  }
+  public var rawValue: Swift.Int {
+    get
+  }
+}
+public enum SunellDeviceChannelStatus : Swift.Int, Swift.CaseIterable {
+  case unkonw
+  case online
+  case offline
+  #if compiler(>=5.3) && $NonescapableTypes
+  public init?(rawValue: Swift.Int)
+  #endif
+  public typealias AllCases = [SunellSDK.SunellDeviceChannelStatus]
+  public typealias RawValue = Swift.Int
+  nonisolated public static var allCases: [SunellSDK.SunellDeviceChannelStatus] {
+    get
+  }
+  public var rawValue: Swift.Int {
+    get
+  }
+}
+@_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers @objc(SunellSDK) @objcMembers public class SunellSDKEntry : ObjectiveC.NSObject {
+  public protocol Delegate : AnyObject {
+    func sunellSDKDeviceErrorStatus(_ deviceModel: SunellSDK.SunellDeviceModel, _ type: Swift.Int32)
+    func sunellSDKStartAutoReconnect(_ deviceModel: SunellSDK.SunellDeviceModel)
+    func sunellSDKEndAutoReconnect(_ deviceModel: SunellSDK.SunellDeviceModel, _ isSuccess: Swift.Bool)
+    func sunellSDKAlarmInfo(_ deviceModel: SunellSDK.SunellDeviceModel, alarmInfo: Swift.String)
+    func sunellSDKVideoOperation(_ deviceId: Swift.String, channelId: Swift.Int, eventId: Swift.Int, msg: Swift.String, playModel: Swift.Int)
+    func sunellSDKChannelStatusChange(_ channelModel: SunellSDK.SunellChannelModel)
+  }
+  public typealias SunellSDKDelegate = SunellSDK.SunellSDKEntry.Delegate
+  weak public static var delegate: (any SunellSDK.SunellSDKEntry.Delegate)? {
+    get
+    set
+  }
+  #if compiler(>=5.3) && $NonescapableTypes
+  public var delegate: (any SunellSDK.SunellSDKEntry.Delegate)? {
+    get
+    set
+  }
+  #endif
+  @objc public static let shared: SunellSDK.SunellSDKEntry
+  @objc public static func connectDevByP2P(uuid: Swift.String, port: Swift.Int, user: Swift.String, pwd: Swift.String, resultBlock: @escaping (Swift.Int, SunellSDK.SunellDeviceModel) -> Swift.Void)
+  @objc public static func connectDevByIP(ip: Swift.String, port: Swift.Int, user: Swift.String, pwd: Swift.String, resultBlock: @escaping (Swift.Int, SunellSDK.SunellDeviceModel) -> Swift.Void)
+  @objc public static func disConnectDev(deviceId: Swift.String)
+  @objc public static func liveStart(deviceId: Swift.String, channelId: Swift.Int, streamType: Swift.Int, isHw: Swift.Bool, caLayer: QuartzCore.CAEAGLLayer, resultBlock: @escaping (Swift.Int) -> Swift.Void)
+  @objc public static func liveStop(deviceId: Swift.String, channelId: Swift.Int, resultBlock: @escaping (Swift.Int) -> Swift.Void)
+  @objc public static func captureImageWithDeviceId(deviceId: Swift.String, channelId: Swift.Int, path: Swift.String, resultBlock: @escaping (Swift.Int) -> Swift.Void)
+  @objc public static func audioSwitchWithDeviceId(deviceId: Swift.String, channelId: Swift.Int, isOpen: Swift.Bool, resultBlock: @escaping (Swift.Int) -> Swift.Void)
+  @objc public static func talkSwitchWithDeviceId(deviceId: Swift.String, channelId: Swift.Int, isOpen: Swift.Bool, resultBlock: @escaping (Swift.Int) -> Swift.Void)
+  @objc public static func qualityAdjustmentWithDeviceId(deviceId: Swift.String, channelId: Swift.Int, qualityType: Swift.Int, resultBlock: @escaping (Swift.Int) -> Swift.Void)
+  #if compiler(>=5.3) && $NonescapableTypes
+  @objc public static func getDeviceCapacityWithDeviceId(deviceId: Swift.String, channelId: Swift.Int, resultBlock: @escaping (Swift.Int, SunellSDK.SunellChannelModel?) -> Swift.Void)
+  #endif
+  @objc public static func openPTZWithDeivceId(deviceId: Swift.String, channelId: Swift.Int, resultBlock: @escaping (Swift.Int) -> Swift.Void)
+  @objc public static func closePTZWithDeviceId(deviceId: Swift.String, channelId: Swift.Int, resultBlock: @escaping (Swift.Int) -> Swift.Void)
+  @objc public static func operationPTZWithDeviceId(deviceId: Swift.String, channelId: Swift.Int, arrowType: Swift.Int, resultBlock: @escaping (Swift.Int) -> Swift.Void)
+  @objc public static func stopPTZWithDeviceId(deviceId: Swift.String, channelId: Swift.Int, resultBlock: @escaping (Swift.Int) -> Swift.Void)
+  #if compiler(>=5.3) && $NonescapableTypes
+  @objc public static func getWhiteLightAbilityWithDeviceId(deviceId: Swift.String, channelId: Swift.Int, resultBlock: @escaping (Swift.Int, Swift.String?) -> Swift.Void)
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
+  @objc public static func getWhiteLightSwitchParamWithDeviceId(deviceId: Swift.String, channelId: Swift.Int, resultBlock: @escaping (Swift.Int, Swift.String?) -> Swift.Void)
+  #endif
+  @objc public static func setWhiteLightSwitchParamWithDeviceId(deviceId: Swift.String, channelId: Swift.Int, paramJson: Swift.String, resultBlock: @escaping (Swift.Int) -> Swift.Void)
+  #if compiler(>=5.3) && $NonescapableTypes
+  @objc public static func getAudioAlarmInfoWithDeviceId(deviceId: Swift.String, channelId: Swift.Int, resultBlock: @escaping (Swift.Int, Swift.String?) -> Swift.Void)
+  #endif
+  @objc public static func playAudioAlarmWithDeviceId(deviceId: Swift.String, channelId: Swift.Int, displayId: Swift.Int, playNum: Swift.Int, resultBlock: @escaping (Swift.Int) -> Swift.Void)
+  @objc public static func playBackStartWithDeviceId(deviceId: Swift.String, channelId: Swift.Int, startTimeStr: Swift.String, streamType: Swift.Int, isHwDec: Swift.Bool, caLayer: QuartzCore.CAEAGLLayer, resultBlock: @escaping (Swift.Int) -> Swift.Void)
+  @objc public static func playBackStopWithDeviceId(deviceId: Swift.String, channelId: Swift.Int, resultBlock: @escaping (Swift.Int) -> Swift.Void)
+  @objc public static func playBackPauseWithDeviceId(deviceId: Swift.String, channelId: Swift.Int, resultBlock: @escaping (Swift.Int) -> Swift.Void)
+  @objc public static func playBackResumeWithDeviceId(deviceId: Swift.String, channelId: Swift.Int, resultBlock: @escaping (Swift.Int) -> Swift.Void)
+  @objc public static func playBackSeekWithDeviceId(deviceId: Swift.String, channelId: Swift.Int, timeStr: Swift.String, resultBlock: @escaping (Swift.Int) -> Swift.Void)
+  @objc public static func getPlayBackOneDayRecordListWithDeviceId(deviceId: Swift.String, channelId: Swift.Int, dayStr: Swift.String, resultBlock: @escaping (Swift.Int, Swift.String) -> Swift.Void)
+  @objc public static func getPlayBackRecordWithinACertainPeriodOfTimeWithDeviceId(deviceId: Swift.String, channelId: Swift.Int, startDateStr: Swift.String, endDateStr: Swift.String, resultBlock: @escaping (Swift.Int, Swift.String) -> Swift.Void)
+  @objc public static func getWhichDaysWithinTheTimePeriodHavePlaybackRecordsWithDeviceId(deviceId: Swift.String, channelId: Swift.Int, startDayStr: Swift.String, endDayStr: Swift.String, resultBlock: @escaping (Swift.Int, Swift.String) -> Swift.Void)
+  public static func playBackSetSpeedWithDeviceId(deviceId: Swift.String, channelId: Swift.Int, speed: SunellSDK.SunellPlaybackSpeed, resultBlock: @escaping (Swift.Int) -> Swift.Void)
+  @objc public static func startDeviceChannelAlarmMonitoring(deviceId: Swift.String)
+  @objc public static func stopDeviceChannelAlarmMonitoring(deviceId: Swift.String)
+  @objc public static func closeGL()
+  @objc deinit
+}
+extension SunellSDK.SunellPlaybackSpeed : Swift.Equatable {}
+extension SunellSDK.SunellPlaybackSpeed : Swift.Hashable {}
+extension SunellSDK.SunellPlaybackSpeed : Swift.RawRepresentable {}
+extension SunellSDK.SunellDeviceChannelStatus : Swift.Equatable {}
+extension SunellSDK.SunellDeviceChannelStatus : Swift.Hashable {}
+extension SunellSDK.SunellDeviceChannelStatus : Swift.RawRepresentable {}

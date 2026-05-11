@@ -14,9 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 //- (void)initP2P;
 //- (NSDictionary *_Nullable)getMapAddr:(NSString *)uuid  isUpgradeP2P:(BOOL)isUpgrade;
 /**
- * result
- * 0:正常
- * 其他：失败
+ * result: 0 success, other: failure.
  */
 + (void)getMapAddr:(NSString *)uuid port:(int)port isUpgradeP2P:(BOOL)isUpgrade resultBlock:(void(^)(int result, P2PMapAddrInfoModel* model))resultBlock;
 @end

@@ -1,17 +1,17 @@
 #!/usr/bin/env bash
-# 将 SunellSDK.framework 工程编译并打包为 SunellSDK.xcframework，供 SwiftPM（仓库根目录 Package.swift）分发。
+# Build SunellSDK.framework from the Xcode project and package SunellSDK.xcframework for SwiftPM (root Package.swift).
 #
-# 产出：默认 Release → Distribution/SunellSDK/SunellSDK.xcframework
-#   - 真机：generic/platform=iOS（通常为 ios-arm64）
-#   - 模拟器（默认）：仅 **x86_64**（Intel 模拟器 slice：ios-x86_64-simulator）
-#     与当前 SunellBaseSDK.a / SunellP2PSDK.a 仅支持「真机 + Intel 模拟器」一致；**v1 不包含 arm64-simulator**（Apple 芯片本机模拟器）。
-#     将来若预编译库支持 M 芯片模拟器：SIMULATOR_ARCHS=arm64 或同时打 arm64+x86_64 再合并（需厂商库支持）。
+# Output (default Release): Distribution/SunellSDK/SunellSDK.xcframework
+#   - Device: generic/platform=iOS (typically ios-arm64)
+#   - Simulator (default): **x86_64** only (Intel simulator slice: ios-x86_64-simulator).
+#     Matches SunellBaseSDK.a / SunellP2PSDK.a (device + Intel sim only); v1 has **no arm64-simulator** (Apple Silicon host simulator).
+#     When vendor libs add M-sim support: set SIMULATOR_ARCHS=arm64 or build both and merge.
 #
-# 若已在 Xcode 中分别编出 Release-iphoneos / Release-iphonesimulator 的 .framework，可改用：
+# If you already built Release-iphoneos / Release-iphonesimulator frameworks in Xcode, use:
 #   ./scripts/merge_release_frameworks_to_xcframework.sh
 #
-# 用法：在仓库根目录执行 ./scripts/build_sunell_xcframework.sh
-# 可选环境变量：SCHEME CONFIGURATION PROJECT OUTPUT_DIR BUILD_DIR SIMULATOR_ARCHS
+# Usage: from repo root ./scripts/build_sunell_xcframework.sh
+# Optional env: SCHEME CONFIGURATION PROJECT OUTPUT_DIR BUILD_DIR SIMULATOR_ARCHS
 
 set -euo pipefail
 
@@ -25,7 +25,7 @@ PROJECT="${PROJECT:-${ROOT_DIR}/SunellSDK.xcodeproj}"
 BUILD_DIR="${BUILD_DIR:-${ROOT_DIR}/build/xcframework}"
 OUTPUT_DIR="${OUTPUT_DIR:-${ROOT_DIR}/Distribution/SunellSDK}"
 FRAMEWORK_NAME="SunellSDK"
-# 模拟器仅打 x86_64，避免链接 arm64-simulator 时与「真机 arm64」预编译 .a 冲突（v1 不支持 Apple Silicon 模拟器）
+# Simulator: x86_64 only to avoid arm64-simulator linking device arm64 static libs (v1: no Apple Silicon simulator).
 SIMULATOR_ARCHS="${SIMULATOR_ARCHS:-x86_64}"
 
 IOS_ARCHIVE="${BUILD_DIR}/${FRAMEWORK_NAME}-ios.xcarchive"
@@ -53,7 +53,7 @@ if [[ ! -d "${IOS_FW}" ]]; then
 fi
 
 HAVE_SIM=0
-echo "==> [${CONFIGURATION}] Archiving ${SCHEME} for iOS Simulator（ARCHS=${SIMULATOR_ARCHS}，v1：Intel 模拟器）…"
+echo "==> [${CONFIGURATION}] Archiving ${SCHEME} for iOS Simulator (ARCHS=${SIMULATOR_ARCHS}, v1: Intel simulator)…"
 if xcodebuild archive \
   -project "${PROJECT}" \
   -scheme "${SCHEME}" \
@@ -72,8 +72,8 @@ then
   fi
 else
   echo "" >&2
-  echo "warning: 模拟器归档失败（当前已限制为 x86_64 以匹配预编译静态库）。" >&2
-  echo "warning: 将只生成 **真机** xcframework。排查: ./scripts/inspect_precompiled_a_platform.sh" >&2
+  echo "warning: Simulator archive failed (build limited to x86_64 for prebuilt static libs)." >&2
+  echo "warning: Output will be **device-only** xcframework. See: ./scripts/inspect_precompiled_a_platform.sh" >&2
   echo "" >&2
 fi
 
@@ -81,13 +81,13 @@ rm -rf "${XCFRAMEWORK_OUT}"
 
 if [[ "${HAVE_SIM}" -eq 1 ]]; then
   SIM_FW="${SIM_ARCHIVE}/Products/Library/Frameworks/${FRAMEWORK_NAME}.framework"
-  echo "==> Creating xcframework（真机 + Intel 模拟器 x86_64；v1 不含 arm64-simulator）…"
+  echo "==> Creating xcframework (device + Intel simulator x86_64; v1: no arm64-simulator)…"
   xcodebuild -create-xcframework \
     -framework "${IOS_FW}" \
     -framework "${SIM_FW}" \
     -output "${XCFRAMEWORK_OUT}"
 else
-  echo "==> Creating xcframework（仅真机）…"
+  echo "==> Creating xcframework (device only)…"
   xcodebuild -create-xcframework \
     -framework "${IOS_FW}" \
     -output "${XCFRAMEWORK_OUT}"
@@ -97,4 +97,4 @@ echo "==> Slices:"
 /usr/bin/find "${XCFRAMEWORK_OUT}" -maxdepth 2 -type d \( -name "ios-*" -o -name "ios-*-simulator" \) 2>/dev/null | sort || ls -la "${XCFRAMEWORK_OUT}"
 
 echo "==> Done: ${XCFRAMEWORK_OUT}"
-echo "    SPM：仓库根目录 Package.swift（binaryTarget 指向上述路径）；提交时请一并纳入 xcframework 或改用 url+checksum。"
+echo "    SPM: root Package.swift (binaryTarget path above); commit xcframework or use url+checksum."

@@ -33,11 +33,14 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     func sceneDidBecomeActive(_ scene: UIScene) {
         // Called when the scene has moved from an inactive state to an active state.
         // Use this method to restart any tasks that were paused (or not yet started) when the scene was inactive.
+        NotificationCenter.default.post(name: .sunellSceneDidBecomeActiveResumeVideo, object: nil)
     }
 
     func sceneWillResignActive(_ scene: UIScene) {
         // Called when the scene will move from an active state to an inactive state.
         // This may occur due to temporary interruptions (ex. an incoming phone call).
+        // Stop GPU preview before becoming inactive/background to avoid kIOGPUCommandBufferCallbackErrorBackgroundExecutionNotPermitted.
+        NotificationCenter.default.post(name: .sunellSceneWillResignActivePauseVideo, object: nil)
     }
 
     func sceneWillEnterForeground(_ scene: UIScene) {
@@ -55,6 +58,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 }
 
 extension SceneDelegate: SunellSDKEntry.Delegate {
+    func sunellSDKChannelStatusChange(_ channelModel: SunellChannelModel) {
+        print("device Id:\(channelModel.deviceId),channelId:\(channelModel.channelId),channelName:\(channelModel.channleName),status:\(channelModel.status)")
+    }
+    
     func sunellSDKDeviceErrorStatus(_ deviceModel: SunellDeviceModel, _ type: Int32) {
         print(deviceModel.deviceId,type)
         print("SceneDelegate sunellSDKDeviceErrorStatus:",type)
@@ -62,9 +69,9 @@ extension SceneDelegate: SunellSDKEntry.Delegate {
     
     func sunellSDKStartAutoReconnect(_ deviceModel: SunellDeviceModel) {
         print(deviceModel.status)
-        // 更新沙盒和当前device的在线状态
+        // Update sandbox and current device online state.
         print("SceneDelegate sunellSDKStartAutoReconnect:",deviceModel.status)
-        // 设备掉线正在发起重连
+        // Device went offline; reconnect in progress.
         DeviceManager.shared.addDevice(deviceModel)
         NotificationCenter.default.post(
             name: .sunellDeviceAutoReconnectStatusDidChange,
@@ -78,11 +85,11 @@ extension SceneDelegate: SunellSDKEntry.Delegate {
     
     func sunellSDKEndAutoReconnect(_ deviceModel: SunellDeviceModel, _ isSuccess: Bool) {
         print(deviceModel.deviceId,isSuccess)
-        // 更新沙盒和当前device的在线状态
+        // Update sandbox and current device online state.
         print(deviceModel.status)
         print("SceneDelegate sunellSDKEndAutoReconnect:",deviceModel.status)
         if(isSuccess){
-            // 重新上线
+            // Back online.
             DeviceManager.shared.addDevice(deviceModel)
             NotificationCenter.default.post(
                 name: .sunellDeviceAutoReconnectStatusDidChange,
@@ -97,11 +104,17 @@ extension SceneDelegate: SunellSDKEntry.Delegate {
     }
     
     func sunellSDKAlarmInfo(_ deviceModel: SunellDeviceModel, alarmInfo: String) {
-        // 未实现
+        // Not implemented.
     }
     
     func sunellSDKVideoOperation(_ deviceId: String, channelId: Int, eventId: Int, msg: String, playModel: Int) {
-        // 未实现
+        var dict = [String: Any]()
+        dict["deviceId"] = deviceId;
+        dict["channelId"] = channelId;
+        dict["eventId"] = eventId;
+        dict["playModel"] = playModel;
+        dict["msg"] = msg;
+        NotificationCenter.default.post(name: Notification.Name("sunellSDKVideoOperation"), object: dict)
     }
     
   
@@ -111,6 +124,10 @@ extension SceneDelegate: SunellSDKEntry.Delegate {
 }
 
 extension Notification.Name {
-    /// 自动重连阶段变化：`userInfo` 含 `phase`（`start` / `end`）、`deviceId`、`status`，`end` 时含 `success`。
+    /// Auto-reconnect phase updates: `userInfo` may include `phase` (`start` / `end`), `deviceId`, `status`, and on `end` optionally `success`.
     static let sunellDeviceAutoReconnectStatusDidChange = Notification.Name("sunellDeviceAutoReconnectStatusDidChange")
+    /// Scene will leave foreground (call overlay / pre-background): stop preview/GPU.
+    static let sunellSceneWillResignActivePauseVideo = Notification.Name("sunellSceneWillResignActivePauseVideo")
+    /// Scene is active again: preview can be resumed.
+    static let sunellSceneDidBecomeActiveResumeVideo = Notification.Name("sunellSceneDidBecomeActiveResumeVideo")
 }

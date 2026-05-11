@@ -7,23 +7,30 @@
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
+
 NS_ASSUME_NONNULL_BEGIN
 
-@class SunellDeviceModel;
+typedef enum {
+    SunellSpeed_1,    // 1x
+    SunellSpeed_2,    // 2x
+}SunellSpeedType;
+
+@class SunellDeviceModel,SunellChannelModel;
 
 @protocol SunellSDKManagerDelegate <NSObject>
 @optional;
-// 设备异常状态回掉
+// Device error / offline callback.
 - (void)sunellSDKDeviceErrorStatus:(SunellDeviceModel*)deviceModel type:(int)type;
-// 异常情况自动重练开启设备
+// Auto reconnect started after abnormal disconnect.
 - (void)sunellSDKStartAutoReconnect:(SunellDeviceModel*)deviceModel;
-// 是否重连接成功
+// Auto reconnect finished.
 - (void)sunellSDKEndtAutoReconnect:(SunellDeviceModel *)deviceModel isSuccess:(BOOL)isSuccess;
-// 报警消息
+// Alarm payload.
 - (void)sunellSDKAlarmInfo:(SunellDeviceModel*)deviceModel alarmInfo:(NSString*)alarmInfo;
-// 视频操作回掉
+// Video operation callback.
 - (void)sunellSDKVideoOperation:(NSString*)deviceId channelId:(int)channelId eventId:(int)eventId msg:(NSString*)msg playModel:(int)playModel;
-
+// device channel online /offline
+- (void)sunellSDKChannelStatusChangeNotiWithChannelModel:(SunellChannelModel*)channelModel;
 @end
 
 @interface SunellSDKManager : NSObject
@@ -31,41 +38,132 @@ NS_ASSUME_NONNULL_BEGIN
 + (instancetype)shared;
 
 /**
- * p2p登录设备结果result
- * result >= 1000 正常
- * result == -507,用户名错误
- * result == - 508,密码错误
+ * P2P connect result code.
+ * result >= 1000: success.
+ * result == -507: wrong username.
+ * result == -508: wrong password.
  */
 + (void)connectDevByP2P:(NSString *)uuid port:(int)port user:(NSString *)user pwd:(NSString *)pwd reulstBlock:(void (^)(int result,SunellDeviceModel *device))resultBlock;
 
 /**
- * iP登录设备
- *
+ * Connect by IP / host.
  */
 + (void)connectDevByIP:(NSString*)ip port:(int)port user:(NSString*)user pwd:(NSString*)pwd reulstBlock:(void (^)(int result,SunellDeviceModel *device))resultBlock;
 /**
- * 断开设备连接
+ * Disconnect device.
  */
 + (void)disConnectDevByDeviceId:(NSString*)deviceId;
 /**
- * 开始直播
- * 播放ID大于0表示成功
+ * Start live preview.
+ * Return value > 0 usually means success (stream id per native SDK).
  */
 + (void)liveStartWithDevice:(NSString*)deviceId channelId:(int)channelId  streamType:(int)streamType isHwDec:(BOOL)isHwDec layer:(CAEAGLLayer*)caLayer resultBlock:(void(^)(int result))resultBlock;
 /**
- * 结束直播
+ * Stop live preview.
  */
 + (void)liveStopWithDevice:(NSString*)deviceId channelId:(int)channelId resultBlock:(void(^)(int result))resultBlock;
 /**
- * 设备通道上下线状态监听
+ * Channel online/offline monitoring (optional).
  */
-//+ (void)startDeviceChannelStatusMonitoring:(NSString*)deviceId;
-//+ (void)stopDeviceChannelStatusMonitoring:(NSString*)deviceId;
++ (void)startDeviceChannelStatusMonitoring:(NSString*)deviceId;
++ (void)stopDeviceChannelStatusMonitoring:(NSString*)deviceId;
 /**
- * 设备报警状态监听
+ * Alarm monitoring (optional).
  */
 //+ (void)startDeviceChannelAlarmMonitoring:(NSString*)deviceId;
 //+ (void)stopDeviceChannelAlarmMonitoring:(NSString *)deviceId;
+
+/**
+ * capture
+ */
++ (void)captureImageWithDeviceId:(NSString*)deviceId channelId:(int)channelId path:(NSString*)path resultBlock:(void(^)(int result))resultBlock;
+/**
+ * switch audio
+ */
++ (void)audioSwitchWithDeviceId:(NSString*)deviceId channelId:(int)channelId isOpen:(BOOL)isOpen resultBlock:(void(^)(int result))resultBlock;
+/**
+ * switch talk
+ */
++ (void)talkSwitchWithDeviceId:(NSString*)deviceId channelId:(int)channelId isOpen:(BOOL)isOpen resultBlock:(void(^)(int result))resultBlock;
+/**
+ * SD / HD Switch
+ * qualityType: 1  HD
+ * qualityType: 2  SD
+ */
++ (void)qualityAdjustmentWithDeviceId:(NSString*)deviceId channelId:(int)channelId type:(int)qualityType resultBlock:(void(^)(int result))resultBlock;
+/**
+ * Get device capabilities
+ * PTZ capability
+ * Talk capability
+ */
++ (void)getDeviceCapacityWithDeviceId:(NSString*)deviceId channelId:(int)channelId reulstBlock:(void (^)(int result, SunellChannelModel * _Nullable channelModel))resultBlock;
+
+/**
+ * Enable PTZ
+ */
++ (void)openPTZWithDeviceId:(NSString*)deviceId channelId:(int)channelId resultBlock:(void(^)(int result))resultBlock;
+/**
+ * Disable PTZ
+ */
++ (void)closePTZWithDeviceId:(NSString*)deviceId channelId:(int)channelId resultBlock:(void(^)(int result))resultBlock;
+
+/**
+ * operation PTZ
+ * arrowType:
+ * PTZ_UP = 1,        // up
+   PTZ_DOWN = 2,      // down
+   PTZ_LEFT = 3,      // left
+   PTZ_RIGHT = 4,     // right
+   PTZ_LEFT_UP = 5,   // up-left
+   PTZ_LEFT_DOWN = 6, // down-left
+   PTZ_RIGHT_UP = 7,  // up-right
+   PTZ_RIGHT_DOWN = 8, // down-right
+ */
++ (void)operationPTZWithDeviceId:(NSString*)deviceId channelId:(int)channelId arrowType:(int)arrowType resultBlock:(void(^)(int result))resultBlock;
+
++ (void)stopPTZWithDeviceId:(NSString*)deviceId channelId:(int)channelId resultBlock:(void(^)(int result))resultBlock;
+
+/**
+ * Get white-light capability
+ */
++ (void)getWhiteLightAbilityWithDeviceId:(NSString*)deviceId channelId:(int)channelId resultBlock:(void(^)(int result,NSString* _Nullable jsonStr))resultBlock;
+
+/// Read current white-light parameters (JSON string defined by the device).
++ (void)getWhiteLightSwitchParamWithDeviceId:(NSString*)deviceId channelId:(int)channelId resultBlock:(void(^)(int result, NSString * _Nullable jsonStr))resultBlock;
+/// Send white-light parameter JSON (avoid `set` prefix, otherwise Swift imports it as a property setter and no matching member appears).
++ (void)applyWhiteLightSwitchParamWithDeviceId:(NSString*)deviceId channelId:(int)channelId paramJson:(NSString*)paramJson resultBlock:(void(^)(int result))resultBlock;
+// Get alarm audio data
++ (void)getAudioAlarmInfoWithDeviceId:(NSString*)deviceId channelId:(int)channelId resultBlock:(void(^)(int result,NSString * _Nullable jsonStr))resultBlock;
+/**
+ * displayId: audio id (retrieved from + (void)getAudioAlarmInfoWithDeviceId:(NSString*)deviceId channelId:(int)channelId resultBlock:(void(^)(int result,NSString * _Nullable jsonStr))resultBlock)
+ * playNum: number of play times, 0 means loop forever
+ *
+ */
++ (void)playAudioAlarmWithDeviceId:(NSString*)deviceId channelId:(int)channelId displayId:(int)displayId playNum:(int)playNum resultBlock:(void(^)(int result))resultBlock;
+
+// Start playback
++ (void)playbackStartWithDeviceId:(NSString*)deviceId channelId:(int)channelId startTimeStr:(NSString*)startTimeStr streamType:(int)streamType isHwDec:(BOOL)isHwDec layer:(CAEAGLLayer*)caLayer resultBlock:(void(^)(int result))resultBlock;
+// Stop playback
++ (void)playBackStopWithDeviceId:(NSString*)deviceId channelId:(int)channelId resultBlock:(void(^)(int result))resultBlock;
+
+// Pause playback
++ (void)playBackPauseWithDeviceId:(NSString*)deviceId channelId:(int)channelId resultBlock:(void(^)(int result))resultBlock;
+
+// Resume playback
++ (void)playBackResumeWithDeviceId:(NSString*)deviceId channelId:(int)channelId resultBlock:(void(^)(int result))resultBlock;
+
+// seek
++ (void)playBackSeekWithDeviceId:(NSString*)deviceId channelId:(int)channelId startTimeStr:(NSString*)startTimeStr resultBlock:(void(^)(int result))resultBlock;
+
+// speed
++ (void)playBackSetSpeedWithDeviceId:(NSString*)deviceId channelId:(int)channelId speed:(SunellSpeedType)speedType resultBlock:(void(^)(int result))resultBlock;
+
+// Get playback records for a specific day
++ (void)getPlayBackOneDayRecordListWithDeviceId:(NSString*)deviceId channelId:(int)channelId dayStr:(NSString*)dayStr resultBlock:(void(^)(int result,NSString * jsonStr))resultBlock;
+// Get playback records for a time range
++ (void)getPlayBackRecordWithinACertainPeriodOfTimeWithDeviceId:(NSString*)deviceId channelId:(int)channelId startDateStr:(NSString*)startDateStr endDateStr:(NSString*)endDateStr resultBlock:(void(^)(int result,NSString * jsonStr))resultBlock;
+// Get days that contain playback records within a time range
++ (void)getWhichDaysWithinTheTimePeriodHavePlaybackRecordsWithDeviceId:(NSString*)deviceId channelId:(int)channelId startDayStr:(NSString*)startDayStr endDayStr:(NSString*)endDayStr resultBlock:(void(^)(int result,NSString* jsonStr))resultBlock;
 + (void)closeGL;
 @end
 

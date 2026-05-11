@@ -9,7 +9,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 /**
- * SDK内部处理一些逻辑的辅助类，不对外暴露，
+ * Internal helper for SDK state; not part of public API.
  */
 @class SunellDeviceModel;
 @interface SunellInnerDeviceModel : NSObject
@@ -18,6 +18,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,strong)SunellDeviceModel *deviceModel;
 - (void)savePlayeHandleByDeviceId:(NSString*)deviceId channelId:(int)channelId playhandle:(int)playHandle;
 - (int)getPlayHandleByDeviceId:(NSString*)deviceId channelId:(int)channelId;
+/// 停止预览后移除缓存的 stream id，避免旧句柄与内存堆积。
+- (void)removePlayerHandleForDeviceId:(NSString *)deviceId channelId:(int)channelId;
 @end
 
 NS_ASSUME_NONNULL_END

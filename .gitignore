@@ -60,7 +60,6 @@ fastlane/report.xml
 fastlane/Preview.html
 fastlane/screenshots/**/*.png
 fastlane/test_output
-# Binary SDK
-*.a
-*.framework
-*.xcframework
+
+# SunellSDK / SwiftPM 分发
+# 不要将 Distribution/SunellSDK/SunellSDK.xcframework 加入本文件；path 型 binaryTarget 需要随仓库提交该目录。

@@ -8,17 +8,17 @@
 import Foundation
 import SunellSDK
 
-/// 设备列表内存缓存 + Application Support 沙盒 JSON 持久化，下次启动自动恢复。
+/// In-memory device list with Application Support JSON persistence; restored on next launch.
 final class DeviceManager: NSObject {
 
     static let shared = DeviceManager()
 
     private let ioQueue = DispatchQueue(label: "com.sunell.testdemo.devicemanager", qos: .utility)
-    /// 批量重连：在子线程调度，避免阻塞调用方
+    /// Serial reconnect queue (background) to avoid blocking callers.
     private static let connectQueue = DispatchQueue(label: "com.sunell.testdemo.devicemanager.connect", qos: .utility)
     private var devices: [SunellDeviceModel] = []
 
-    /// 设备列表变更时通知 UI 刷新（object 为 nil）
+    /// Posted when the device list changes (object is nil).
     static let deviceListDidChangeNotification = Notification.Name("SunellDeviceListDidChange")
 
     private override init() {
@@ -27,8 +27,8 @@ final class DeviceManager: NSObject {
         connectAllDevice()
     }
 
-    /// 对列表中设备发起重连：P2P 走 `connectDevByP2P`，否则走 `connectDevByIP`（`userName`、`pwd` 任一为空则跳过 IP 重连）。
-    /// 在后台队列遍历并调用 SDK，避免阻塞当前线程。
+    /// Reconnect all devices: P2P uses `connectDevByP2P`, otherwise `connectDevByIP` (skipped if user or password empty).
+    /// Runs on a background queue.
     func connectAllDevice() {
         let snapshot: [SunellDeviceModel] = ioQueue.sync { Array(devices) }
         Self.connectQueue.async { [weak self] in
@@ -67,13 +67,13 @@ final class DeviceManager: NSObject {
         }
     }
 
-    /// 将回调中的在线状态写回列表中的同一台设备（按 `matches` 定位）。
+    /// Merge reconnect callback status into the matching device (`matches` finds the row).
     private func applyReconnectedStatus(deviceModel: SunellDeviceModel, matches: @escaping (SunellDeviceModel) -> Bool) {
         ioQueue.async { [weak self] in
             guard let self else { return }
             guard let idx = self.devices.firstIndex(where: matches) else { return }
             let stored = self.devices[idx]
-            // 每次连接后deviceId都不一样，(deviceId)是一个临时的不是真实的设备Id，
+            // deviceId may change per session; treat as session id, not immutable hardware id.
             stored.deviceId = deviceModel.deviceId;
             guard stored.status != deviceModel.status else { return }
             stored.status = deviceModel.status
@@ -84,12 +84,12 @@ final class DeviceManager: NSObject {
 
     // MARK: - Public API
 
-    /// 当前内存中的全部设备（快照，顺序与存储一致）
+    /// Snapshot of all devices (order matches persistence).
     func allDevices() -> [SunellDeviceModel] {
         ioQueue.sync { Array(devices) }
     }
 
-    /// 添加设备；若 `deviceUUID` 已存在则覆盖同 UUID 的项
+    /// Add or replace device with the same `deviceUUID`.
     func addDevice(_ device: SunellDeviceModel) {
         ioQueue.async { [weak self] in
             guard let self else { return }
@@ -104,7 +104,7 @@ final class DeviceManager: NSObject {
         }
     }
 
-    /// 按设备 UUID 删除
+    /// Remove by device UUID.
     func removeDevice(deviceUUID: String) {
         let key = deviceUUID
         ioQueue.async { [weak self] in
@@ -115,12 +115,12 @@ final class DeviceManager: NSObject {
         }
     }
 
-    /// 删除指定模型（按 UUID 匹配）
+    /// Remove by matching UUID.
     func removeDevice(_ device: SunellDeviceModel) {
         removeDevice(deviceUUID: device.deviceUUID)
     }
 
-    /// 清空列表并写盘
+    /// Clear list and persist.
     func removeAllDevices() {
         ioQueue.async { [weak self] in
             guard let self else { return }
@@ -130,7 +130,7 @@ final class DeviceManager: NSObject {
         }
     }
 
-    /// 重新从沙盒加载（一般无需调用，启动时已加载）
+    /// Reload from disk (usually unnecessary; loaded at init).
     func reloadFromDisk() {
         ioQueue.async { [weak self] in
             guard let self else { return }
@@ -139,7 +139,7 @@ final class DeviceManager: NSObject {
         }
     }
 
-    // MARK: - 沙盒路径
+    // MARK: - Sandbox paths
 
     private var cacheDirectoryURL: URL {
         let fm = FileManager.default
@@ -156,7 +156,7 @@ final class DeviceManager: NSObject {
         cacheDirectoryURL.appendingPathComponent("devices.json", isDirectory: false)
     }
 
-    // MARK: - 持久化
+    // MARK: - Persistence
 
     private struct DevicesFileDTO: Codable {
         var devices: [DeviceCacheDTO]
@@ -165,7 +165,7 @@ final class DeviceManager: NSObject {
     private struct DeviceCacheDTO: Codable {
         var deviceUUID: String
         var deviceName: String
-        /// 旧版 JSON 无此字段时解码为 `nil`，恢复为空串
+        /// Legacy JSON without this field decodes as nil; restored as empty string.
         var userName: String?
         var pwd: String?
         var deviceStyle: String
@@ -180,7 +180,7 @@ final class DeviceManager: NSObject {
         var port: Int
         var chnNum: Int
         var status: Int
-        /// 旧版 `devices.json` 无此字段时解码为 `nil`，恢复为 `false`
+        /// Legacy `devices.json` without this field decodes as nil; restored as false.
         var isP2PAdd: Bool?
         var channels: [ChannelCacheDTO]
     }
@@ -213,7 +213,7 @@ final class DeviceManager: NSObject {
             let data = try JSONEncoder().encode(dto)
             try data.write(to: devicesFileURL, options: [.atomic])
         } catch {
-            // 写盘失败时保留内存数据，仅忽略错误
+            // Keep in-memory data if write fails.
         }
     }
 
@@ -223,14 +223,26 @@ final class DeviceManager: NSObject {
         }
     }
 
-    // MARK: - 模型 ↔ DTO
+    // MARK: - Model <-> DTO
+
+    private static func sunellDeviceStatus(fromPersisted raw: Int) -> SunellDeviceStatus {
+        if raw == 1 {
+            return SunellDeviceStatus_online
+        }
+        switch raw {
+        case SunellDeviceStatus_unknown.rawValue: return SunellDeviceStatus_unknown
+        case SunellDeviceStatus_online.rawValue: return SunellDeviceStatus_online
+        case SunellDeviceStatus_offline.rawValue: return SunellDeviceStatus_offline
+        default: return SunellDeviceStatus_unknown
+        }
+    }
 
     private static func dto(from model: SunellDeviceModel) -> DeviceCacheDTO {
         let chs: [ChannelCacheDTO] = channelModels(from: model.channels as Any?).map { ch in
             ChannelCacheDTO(
                 channelId: Int(ch.channelId),
                 deviceId: ch.deviceId,
-                status: Int(ch.status),
+                status: ch.status.rawValue,
                 channleName: ch.channleName
             )
         }
@@ -250,7 +262,7 @@ final class DeviceManager: NSObject {
             devType: Int(model.devType),
             port: Int(model.port),
             chnNum: Int(model.chnNum),
-            status: Int(model.status),
+            status: model.status.rawValue,
             isP2PAdd: model.isP2PAdd,
             channels: chs
         )
@@ -288,14 +300,14 @@ final class DeviceManager: NSObject {
         m.devType = Int32(dto.devType)
         m.port = Int32(dto.port)
         m.chnNum = Int32(dto.chnNum)
-        // 从沙盒恢复的设备一律视为离线，真实在线状态需由 SDK 监听等逻辑后续刷新
-        m.status = 0
+        // Restored devices start offline; SDK callbacks refresh real status.
+        m.status = SunellDeviceStatus_unknown
         m.isP2PAdd = dto.isP2PAdd ?? false
         let channels: [SunellChannelModel] = dto.channels.map { c in
             let ch = SunellChannelModel()
             ch.channelId = Int32(c.channelId)
             ch.deviceId = c.deviceId
-            ch.status = Int32(c.status)
+            ch.status = Self.sunellDeviceStatus(fromPersisted: c.status)
             ch.channleName = c.channleName
             return ch
         }

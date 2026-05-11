@@ -116,7 +116,7 @@ class LocalDevicePage: UIViewController {
     }
 
     @objc private func saveButtonTapped() {
-        // 保存按钮事件预留
+        // Save action: reserved.
         guard (addressTextField.text != nil) else {
             return
         }
