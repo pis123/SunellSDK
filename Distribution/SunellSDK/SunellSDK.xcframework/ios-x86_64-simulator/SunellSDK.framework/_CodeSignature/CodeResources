@@ -18,7 +18,7 @@
 		</data>
 		<key>Headers/SunellSDKManager.h</key>
 		<data>
-		jCSEzXYDdhy7F6/yxS7JkdNED2k=
+		f2mEHbMaAuhyd8RXwg32AI/ENro=
 		</data>
 		<key>Info.plist</key>
 		<data>
@@ -26,7 +26,7 @@
 		</data>
 		<key>Modules/SunellSDK.swiftmodule/x86_64-apple-ios-simulator.abi.json</key>
 		<data>
-		bbQ2Z7mzy9hho+Rv00/1VCXv2kM=
+		77+SQ1BsMPI6zj/8roTVlPXMQuY=
 		</data>
 		<key>Modules/SunellSDK.swiftmodule/x86_64-apple-ios-simulator.private.swiftinterface</key>
 		<data>
@@ -34,7 +34,7 @@
 		</data>
 		<key>Modules/SunellSDK.swiftmodule/x86_64-apple-ios-simulator.swiftdoc</key>
 		<data>
-		aHvZeURZAppgWftkyBkL/jott/Y=
+		G/q1upIfTv7yI3Fh/FTw/NRqK2k=
 		</data>
 		<key>Modules/SunellSDK.swiftmodule/x86_64-apple-ios-simulator.swiftinterface</key>
 		<data>
@@ -42,7 +42,7 @@
 		</data>
 		<key>Modules/SunellSDK.swiftmodule/x86_64-apple-ios-simulator.swiftmodule</key>
 		<data>
-		OnXipCeaiAVZ4B2xHHlsCfZJkvA=
+		9cjOwEj7MjWdJETceVUibvKxG60=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
@@ -50,7 +50,7 @@
 		</data>
 		<key>SunellSDKSwiftAPI.md</key>
 		<data>
-		IX8kXLfJZwPHMQV8Fw2JKjUJsiY=
+		Bz19j/H6SmGqYWrZlliqfIuYooA=
 		</data>
 	</dict>
 	<key>files2</key>
@@ -80,14 +80,14 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			OghRAUyKe3lHTwqylnkPMXLu+T+vtLvr33B50wccuuw=
+			tTQjhCEhcGIS71fl4DhBlJpqFYR70cwmegG1ex91Wo4=
 			</data>
 		</dict>
 		<key>Modules/SunellSDK.swiftmodule/x86_64-apple-ios-simulator.abi.json</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			GUndNbGDniaagknwCx3NQPDUa+SnDP9aICjjOg5EhyY=
+			3yHTamSgkEP91KfN3LM9ko1aeuKMgOu/8lUE6MlXU8Q=
 			</data>
 		</dict>
 		<key>Modules/SunellSDK.swiftmodule/x86_64-apple-ios-simulator.private.swiftinterface</key>
@@ -101,7 +101,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			Yf9HIRwud0rjTgNfyMerJ+LFiDDWKTyodTHSjkcJnss=
+			XuUOOXTa8AH0Tj8o7GZ2igal88zkKursMjy6YHksNKo=
 			</data>
 		</dict>
 		<key>Modules/SunellSDK.swiftmodule/x86_64-apple-ios-simulator.swiftinterface</key>
@@ -115,7 +115,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			+SGhO0bFAGU/jjDTLhLwrunMU7wdT44YqDNk8cxKguw=
+			hYmGrvmPU204sANCfE79bZWvkgazq3/hkx/zWXPUW+E=
 			</data>
 		</dict>
 		<key>Modules/module.modulemap</key>
@@ -129,7 +129,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			epJpmCV4GWDFCLXwtVFwP4UmFjaQKKhCFx9kpHl9J5Y=
+			AkFiS1woSQKFqI2n8KkJImnuIuboq+cnJPdKDDoiZGE=
 			</data>
 		</dict>
 	</dict>

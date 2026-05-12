@@ -466,17 +466,49 @@ final class PlayerBackPage: UIViewController {
 
         let preDayStr = formatter.string(from: yesterdayZero)
         let tomorrowStr = formatter.string(from: tomorrowZero)
-        requestPlaybackRecordListForPeriod(startDateStr: preDayStr, endDateStr: tomorrowStr)
+        requestPlaybackRecordListForPeriod(startDateStr: preDayStr, endDateStr: tomorrowStr, showResultAlert: false)
     }
 
-    private func requestPlaybackRecordListForPeriod(startDateStr: String, endDateStr: String) {
+    /// 弹窗仅展示单行摘要；过长内容尾部用「…」截断（避免整段 JSON 撑满界面）。
+    private func presentPlaybackQueryResultAlert(result: Int, jsonStr: String) {
+        let message = Self.singleLineTruncatedQuerySummary(result: result, jsonStr: jsonStr)
+        DispatchQueue.main.async { [weak self] in
+            guard let self else { return }
+            let ac = UIAlertController(
+                title: TKLocalizedString("TK_QueryResult"),
+                message: message,
+                preferredStyle: .alert
+            )
+            ac.addAction(UIAlertAction(title: TKLocalizedString("TK_Confirm"), style: .default))
+            self.present(ac, animated: true)
+        }
+    }
+
+    /// 合并为单行并按 UTF-16 长度截断（适配 `UIAlertController` 展示习惯）。
+    private static func singleLineTruncatedQuerySummary(result: Int, jsonStr: String, maxUTF16Length: Int = 120) -> String {
+        let compact = jsonStr
+            .replacingOccurrences(of: "\r\n", with: " ")
+            .replacingOccurrences(of: "\n", with: " ")
+            .replacingOccurrences(of: "\r", with: " ")
+        let collapsed = compact.split { $0.isWhitespace }.joined(separator: " ")
+        let base = "result=\(result), \(collapsed)" as NSString
+        if base.length <= maxUTF16Length {
+            return base as String
+        }
+        let take = max(0, maxUTF16Length - 1)
+        return base.substring(to: take) + "…"
+    }
+
+    private func requestPlaybackRecordListForPeriod(startDateStr: String, endDateStr: String, showResultAlert: Bool = false) {
         SunellSDKEntry.getPlayBackRecordWithinACertainPeriodOfTimeWithDeviceId(
             deviceId: device.deviceId,
             channelId: currentChannel,
             startDateStr: startDateStr,
             endDateStr: endDateStr
-        ) { result, jsonStr in
+        ) { [weak self] result, jsonStr in
             print("时间段回放记录:", "result=\(result)", jsonStr)
+            guard let self, showResultAlert else { return }
+            self.presentPlaybackQueryResultAlert(result: result, jsonStr: jsonStr)
         }
     }
 
@@ -487,15 +519,19 @@ final class PlayerBackPage: UIViewController {
             channelId: currentChannel,
             startDayStr: startDayStr,
             endDayStr: endDayStr
-        ) { result, jsonStr in
+        ) { [weak self] result, jsonStr in
             print("哪些天有回放记录:", "result=\(result)", jsonStr)
+            guard let self else { return }
+            self.presentPlaybackQueryResultAlert(result: result, jsonStr: jsonStr)
         }
     }
 
     private func requestPlaybackRecordListForCalendarDay(dayStr: String) {
-        SunellSDKEntry.getPlayBackOneDayRecordListWithDeviceId(deviceId: device.deviceId, channelId: currentChannel, dayStr: dayStr) { result, jsonStr in
-            // Playback record example: {"data":[{"is_alarm":false,"s_time":"2026-05-07 00:00:00","e_time":"2026-05-07 11:54:00"}]}
+        SunellSDKEntry.getPlayBackOneDayRecordListWithDeviceId(deviceId: device.deviceId, channelId: currentChannel, dayStr: dayStr) { [weak self] result, jsonStr in
+            // 回放记录: {"data":[{"is_alarm":false,"s_time":"2026-05-07 00:00:00","e_time":"2026-05-07 11:54:00"}]}
             print("单日回放记录:", "result=\(result)", jsonStr)
+            guard let self else { return }
+            self.presentPlaybackQueryResultAlert(result: result, jsonStr: jsonStr)
         }
     }
 
@@ -567,7 +603,7 @@ final class PlayerBackPage: UIViewController {
         }
         let startStr = Self.playbackAPIDateTimeFormatter.string(from: periodQueryStartDate)
         let endStr = Self.playbackAPIDateTimeFormatter.string(from: periodQueryEndDate)
-        requestPlaybackRecordListForPeriod(startDateStr: startStr, endDateStr: endStr)
+        requestPlaybackRecordListForPeriod(startDateStr: startStr, endDateStr: endStr, showResultAlert: true)
     }
 
     private func updateDaysWithPlaybackRangeButtonTitles() {

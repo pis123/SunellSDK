@@ -26,6 +26,7 @@
 "TK_SelectEndDate" = "选择结束日期";
 "TK_SelectDate" = "选择日期";
 "TK_Query" = "查询";
+"TK_QueryResult" = "查询结果";
 "TK_Close" = "关闭";
 "TK_PlaybackPause" = "暂停";
 "TK_PlaybackResume" = "继续播放";

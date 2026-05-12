@@ -25,6 +25,7 @@
 "TK_SelectEndDate" = "Select end date";
 "TK_SelectDate" = "Select date";
 "TK_Query" = "Query";
+"TK_QueryResult" = "Query result";
 "TK_Close" = "Close";
 "TK_PlaybackPause" = "Pause";
 "TK_PlaybackResume" = "Resume";

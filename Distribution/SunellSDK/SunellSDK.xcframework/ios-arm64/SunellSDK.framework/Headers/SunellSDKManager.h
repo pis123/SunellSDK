@@ -11,8 +11,8 @@
 NS_ASSUME_NONNULL_BEGIN
 
 typedef enum {
-    SunellSpeed_1,    // 1倍
-    SunellSpeed_2,    // 2倍
+    SunellSpeed_1,    // 1x
+    SunellSpeed_2,    // 2x
 }SunellSpeedType;
 
 @class SunellDeviceModel,SunellChannelModel;
@@ -92,64 +92,64 @@ typedef enum {
  */
 + (void)qualityAdjustmentWithDeviceId:(NSString*)deviceId channelId:(int)channelId type:(int)qualityType resultBlock:(void(^)(int result))resultBlock;
 /**
- * 获取设备能力
- * ptz能力
- * 对讲能力
+ * Get device capabilities
+ * PTZ capability
+ * Talk capability
  */
 + (void)getDeviceCapacityWithDeviceId:(NSString*)deviceId channelId:(int)channelId reulstBlock:(void (^)(int result, SunellChannelModel * _Nullable channelModel))resultBlock;
 
 /**
- * 打开ptz
+ * Enable PTZ
  */
 + (void)openPTZWithDeviceId:(NSString*)deviceId channelId:(int)channelId resultBlock:(void(^)(int result))resultBlock;
 /**
- * 关闭ptz
+ * Disable PTZ
  */
 + (void)closePTZWithDeviceId:(NSString*)deviceId channelId:(int)channelId resultBlock:(void(^)(int result))resultBlock;
 
 /**
  * operation PTZ
  * arrowType:
- * PTZ_UP = 1,        //向上
-   PTZ_DOWN = 2,      //向下
-   PTZ_LEFT = 3,      //左
-   PTZ_RIGHT = 4,     //右
-   PTZ_LEFT_UP = 5,   //左上
-   PTZ_LEFT_DOWN = 6, //左下
-   PTZ_RIGHT_UP = 7,  //右上
-   PTZ_RIGHT_DOWN = 8, //右下
+ * PTZ_UP = 1,        // up
+   PTZ_DOWN = 2,      // down
+   PTZ_LEFT = 3,      // left
+   PTZ_RIGHT = 4,     // right
+   PTZ_LEFT_UP = 5,   // up-left
+   PTZ_LEFT_DOWN = 6, // down-left
+   PTZ_RIGHT_UP = 7,  // up-right
+   PTZ_RIGHT_DOWN = 8, // down-right
  */
 + (void)operationPTZWithDeviceId:(NSString*)deviceId channelId:(int)channelId arrowType:(int)arrowType resultBlock:(void(^)(int result))resultBlock;
 
 + (void)stopPTZWithDeviceId:(NSString*)deviceId channelId:(int)channelId resultBlock:(void(^)(int result))resultBlock;
 
 /**
- * 获取白光灯能力
+ * Get white-light capability
  */
 + (void)getWhiteLightAbilityWithDeviceId:(NSString*)deviceId channelId:(int)channelId resultBlock:(void(^)(int result,NSString* _Nullable jsonStr))resultBlock;
 
-/// 读取白光灯当前参数（JSON 字符串，由设备定义）。
+/// Read current white-light parameters (JSON string defined by the device).
 + (void)getWhiteLightSwitchParamWithDeviceId:(NSString*)deviceId channelId:(int)channelId resultBlock:(void(^)(int result, NSString * _Nullable jsonStr))resultBlock;
-/// 下发白光灯参数 JSON（方法名避免 `set` 前缀，否则 Swift 会按属性 setter 导入导致无对应成员）。
+/// Send white-light parameter JSON (avoid `set` prefix, otherwise Swift imports it as a property setter and no matching member appears).
 + (void)applyWhiteLightSwitchParamWithDeviceId:(NSString*)deviceId channelId:(int)channelId paramJson:(NSString*)paramJson resultBlock:(void(^)(int result))resultBlock;
-// 获取报警音频数据
+// Get alarm audio data
 + (void)getAudioAlarmInfoWithDeviceId:(NSString*)deviceId channelId:(int)channelId resultBlock:(void(^)(int result,NSString * _Nullable jsonStr))resultBlock;
 /**
- * displayId：音频id (+ (void)getAudioAlarmInfoWithDeviceId:(NSString*)deviceId channelId:(int)channelId resultBlock:(void(^)(int result,NSString * _Nullable jsonStr))resultBlock)中获取
- * playNum:播放几次，0无限播放
+ * displayId: audio id (retrieved from + (void)getAudioAlarmInfoWithDeviceId:(NSString*)deviceId channelId:(int)channelId resultBlock:(void(^)(int result,NSString * _Nullable jsonStr))resultBlock)
+ * playNum: number of play times, 0 means loop forever
  *
  */
 + (void)playAudioAlarmWithDeviceId:(NSString*)deviceId channelId:(int)channelId displayId:(int)displayId playNum:(int)playNum resultBlock:(void(^)(int result))resultBlock;
 
-// 打开回放
+// Start playback
 + (void)playbackStartWithDeviceId:(NSString*)deviceId channelId:(int)channelId startTimeStr:(NSString*)startTimeStr streamType:(int)streamType isHwDec:(BOOL)isHwDec layer:(CAEAGLLayer*)caLayer resultBlock:(void(^)(int result))resultBlock;
-// 关闭回放
+// Stop playback
 + (void)playBackStopWithDeviceId:(NSString*)deviceId channelId:(int)channelId resultBlock:(void(^)(int result))resultBlock;
 
-// 暂停回放
+// Pause playback
 + (void)playBackPauseWithDeviceId:(NSString*)deviceId channelId:(int)channelId resultBlock:(void(^)(int result))resultBlock;
 
-// 继续回放
+// Resume playback
 + (void)playBackResumeWithDeviceId:(NSString*)deviceId channelId:(int)channelId resultBlock:(void(^)(int result))resultBlock;
 
 // seek
@@ -158,11 +158,11 @@ typedef enum {
 // speed
 + (void)playBackSetSpeedWithDeviceId:(NSString*)deviceId channelId:(int)channelId speed:(SunellSpeedType)speedType resultBlock:(void(^)(int result))resultBlock;
 
-// 获取某天的回放记录
+// Get playback records for a specific day
 + (void)getPlayBackOneDayRecordListWithDeviceId:(NSString*)deviceId channelId:(int)channelId dayStr:(NSString*)dayStr resultBlock:(void(^)(int result,NSString * jsonStr))resultBlock;
-// 获取某段时间内的回放记录
+// Get playback records for a time range
 + (void)getPlayBackRecordWithinACertainPeriodOfTimeWithDeviceId:(NSString*)deviceId channelId:(int)channelId startDateStr:(NSString*)startDateStr endDateStr:(NSString*)endDateStr resultBlock:(void(^)(int result,NSString * jsonStr))resultBlock;
-// 获取时间段内那些day有回放记录
+// Get days that contain playback records within a time range
 + (void)getWhichDaysWithinTheTimePeriodHavePlaybackRecordsWithDeviceId:(NSString*)deviceId channelId:(int)channelId startDayStr:(NSString*)startDayStr endDayStr:(NSString*)endDayStr resultBlock:(void(^)(int result,NSString* jsonStr))resultBlock;
 + (void)closeGL;
 @end

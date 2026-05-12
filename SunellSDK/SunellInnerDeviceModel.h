@@ -15,6 +15,8 @@ NS_ASSUME_NONNULL_BEGIN
 @interface SunellInnerDeviceModel : NSObject
 @property(nonatomic,assign)int connectHandle;
 @property(nonatomic,strong)NSMutableDictionary *playerHandleDictionary;
+// 0:normal;1:live;2:playback
+@property(nonatomic,assign)int handleType;
 @property(nonatomic,strong)SunellDeviceModel *deviceModel;
 - (void)savePlayeHandleByDeviceId:(NSString*)deviceId channelId:(int)channelId playhandle:(int)playHandle;
 - (int)getPlayHandleByDeviceId:(NSString*)deviceId channelId:(int)channelId;

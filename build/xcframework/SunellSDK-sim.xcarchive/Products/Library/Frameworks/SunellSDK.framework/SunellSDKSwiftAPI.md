@@ -1,115 +1,247 @@
-# SunellSDK Swift API Reference
+# SunellSDK Swift API Documentation
 
-This document describes the Swift-facing API in `SunellSDK.swift` (`SunellSDKEntry`). The module bridges Objective-C types (`SunellSDKManager`, `SunellDeviceModel`) for use from Swift.
+This document is based on `SunellSDK.swift`, `LivePlayerPage.swift`, and `PlayerBackPage.swift`.  
+It describes the Swift API surface and the recommended call flows for Live and Playback pages.
 
-**Requirements:** iOS 13+, import `SunellSDK` (or the umbrella module name exposed by your integration).
-
----
-
-## Overview
-
-| Type | Role |
-|------|------|
-| `SunellSDKEntry` | Main entry point: static methods for connect/disconnect/live, plus delegate bridging. |
-| `SunellSDKEntry.Delegate` | Swift protocol mirroring `SunellSDKManagerDelegate` callbacks. |
-| `SunellSDKDelegate` | Typealias for `Delegate` (legacy naming). |
-
-Use **`SunellSDKEntry.delegate`** (static or via `SunellSDKEntry.shared.delegate`) to receive device lifecycle, alarm, and video events.
+Applies to iOS 13+ with `import SunellSDK`.
 
 ---
 
-## Delegate
+## 1. Core Entry and Types
+
+### 1.1 Entry class
+
+- `SunellSDKEntry`: Unified Swift entry point (connection, live, playback, capability, alarm, monitoring, GL cleanup).
+- `SunellSDKEntry.shared`: Instance-style access (mainly used for delegate assignment).
+
+### 1.2 Enums
+
+- `SunellPlaybackSpeed`
+  - `.x1` (1x)
+  - `.x2` (2x)
+- `SunellDeviceChannelStatus`
+  - `.unkonw` / `.online` / `.offline`
+
+---
+
+## 2. Delegate Callbacks
+
+Setup:
+
+```swift
+SunellSDKEntry.delegate = self
+// or
+SunellSDKEntry.shared.delegate = self
+```
+
+Protocol:
 
 ```swift
 public protocol Delegate: AnyObject {
-    func sunellSDKDeviceErrorStatus(_ deviceModel: SunellDeviceModel, _ type: Int32)
-    func sunellSDKStartAutoReconnect(_ deviceModel: SunellDeviceModel)
-    func sunellSDKEndAutoReconnect(_ deviceModel: SunellDeviceModel, _ isSuccess: Bool)
+    func sunellSDKDeviceErrorStatus(_ deviceModel: SunellDeviceModel,_ type: Int32)
+    func sunellSDKStartAutoReconnect(_ deviceModel:SunellDeviceModel)
+    func sunellSDKEndAutoReconnect(_ deviceModel:SunellDeviceModel,_ isSuccess: Bool)
     func sunellSDKAlarmInfo(_ deviceModel: SunellDeviceModel, alarmInfo: String)
     func sunellSDKVideoOperation(_ deviceId: String, channelId: Int, eventId: Int, msg: String, playModel: Int)
+    func sunellSDKChannelStatusChange(_ channelModel: SunellChannelModel)
 }
 ```
 
-| Callback | When |
-|----------|------|
-| `sunellSDKDeviceErrorStatus` | Device error/offline notification; `type` follows native SDK disconnect reasons. |
-| `sunellSDKStartAutoReconnect` | SDK begins automatic reconnect after an abnormal disconnect. |
-| `sunellSDKEndAutoReconnect` | Automatic reconnect finished; `isSuccess` indicates outcome. |
-| `sunellSDKAlarmInfo` | Alarm string from device. |
-| `sunellSDKVideoOperation` | Video pipeline events (operation feedback). |
+Callback meanings:
 
-**Note:** The internal `DelegateBridge` keeps a strong reference so that `SunellSDKManager.delegate` (weak) still receives events when you assign `SunellSDKEntry.delegate`.
-
----
-
-## Connection
-
-### `connectDevByP2P(uuid:port:user:pwd:resultBlock:)`
-
-Connects via P2P/NAT mapping using device UUID.
-
-- **Parameters**
-  - `uuid`: Device UUID / serial used for P2P resolution.
-  - `port`: Port for map/relay (see native P2P flow).
-  - `user`, `pwd`: Credentials.
-  - `resultBlock`: `(Int, SunellDeviceModel)` — first value is handle/result code (see `SunellSDKManager` docs: typically `>= 1000` success; `-507` / `-508` user/password errors).
-
-### `connectDevByIP(ip:port:user:pwd:resultBlock:)`
-
-Connects directly by IPv4/hostname and port.
-
-- **Parameters**
-  - `ip`, `port`, `user`, `pwd`: Same semantics as native `connectDevByIP`.
-  - `resultBlock`: Same as P2P.
-
-### `disConnectDev(deviceId:)`
-
-Disconnects the session associated with `deviceId` (the identifier used in your app/SDK cache).
+- `sunellSDKDeviceErrorStatus`: Device error/offline status changed.
+- `sunellSDKStartAutoReconnect`: SDK started auto-reconnect after abnormal disconnect.
+- `sunellSDKEndAutoReconnect`: Auto-reconnect finished, `isSuccess` indicates final result.
+- `sunellSDKAlarmInfo`: Alarm payload from device.
+- `sunellSDKVideoOperation`: Video operation event (`eventId == 100` is commonly used as "video opened successfully").
+- `sunellSDKChannelStatusChange`: Channel status change notification.
 
 ---
 
-## Live preview
+## 3. API List (Grouped by Capability)
 
-### `liveStart(deviceId:channelId:streamType:isHw:caLayer:resultBlcok:)`
+> Note: Most interfaces use `result == 0` for success.  
+> Some start-type APIs may return `>= 0` as success. Always follow your native SDK/device contract.
 
-Starts live preview on an `CAEAGLLayer`.
+### 3.1 Connection Management
 
-| Parameter | Description |
-|-----------|-------------|
-| `deviceId` | Device id string used when connecting (matches cached model). |
-| `channelId` | Default `1` for single-channel devices; for NVR use the target channel id. |
-| `streamType` | `1` = high (HD), `2` = sub (smooth). |
-| `isHw` | Enable hardware-accelerated decode when supported. |
-| `caLayer` | Target `CAEAGLLayer` for rendering. |
-| `resultBlcok` | `Int` result from native API; **≥ 0** typically means stream id / success per native contract. |
+- `connectDevByP2P(uuid:port:user:pwd:resultBlock:)`
+- `connectDevByIP(ip:port:user:pwd:resultBlock:)`
+- `disConnectDev(deviceId:)`
 
-### `liveStop(deviceId:channelId:resultBlcok:)`
+`resultBlock` returns `(Int, SunellDeviceModel)`.  
+On success, use `deviceId`, `channels`, and `chnNum` to drive UI/business logic.
 
-Stops the live session for the given device and channel.
+### 3.2 Live Preview
 
-### `closeGL()`
+- `liveStart(deviceId:channelId:streamType:isHw:caLayer:resultBlock:)`
+- `liveStop(deviceId:channelId:resultBlock:)`
+- `captureImageWithDeviceId(deviceId:channelId:path:resultBlock:)`
+- `audioSwitchWithDeviceId(deviceId:channelId:isOpen:resultBlock:)`
+- `talkSwitchWithDeviceId(deviceId:channelId:isOpen:resultBlock:)`
+- `qualityAdjustmentWithDeviceId(deviceId:channelId:qualityType:resultBlock:)`
 
-Stops all GL/video consumers across connected devices (global cleanup).
+Parameter conventions (Live):
+
+- `streamType`: `1 = HD`, `2 = SD/sub stream`
+- `qualityType`: `1 = HD`, `2 = SD`
+- `caLayer`: pass `PlayerViewCell.glLayer` (`CAEAGLLayer`)
+
+### 3.3 PTZ and Device Capability
+
+- `getDeviceCapacityWithDeviceId(deviceId:channelId:resultBlock:)`
+- `openPTZWithDeivceId(deviceId:channelId:resultBlock:)`
+- `closePTZWithDeviceId(deviceId:channelId:resultBlock:)`
+- `operationPTZWithDeviceId(deviceId:channelId:arrowType:resultBlock:)`
+- `stopPTZWithDeviceId(deviceId:channelId:resultBlock:)`
+
+`arrowType` mapping:
+
+- `1` up
+- `2` down
+- `3` left
+- `4` right
+- `5` up-left
+- `6` down-left
+- `7` up-right
+- `8` down-right
+
+### 3.4 White Light and Alarm Audio
+
+- `getWhiteLightAbilityWithDeviceId(deviceId:channelId:resultBlock:)`
+- `getWhiteLightSwitchParamWithDeviceId(deviceId:channelId:resultBlock:)`
+- `setWhiteLightSwitchParamWithDeviceId(deviceId:channelId:paramJson:resultBlock:)`
+- `getAudioAlarmInfoWithDeviceId(deviceId:channelId:resultBlock:)`
+- `playAudioAlarmWithDeviceId(deviceId:channelId:displayId:playNum:resultBlock:)`
+
+### 3.5 Playback
+
+- `playBackStartWithDeviceId(deviceId:channelId:startTimeStr:streamType:isHwDec:caLayer:resultBlock:)`
+- `playBackStopWithDeviceId(deviceId:channelId:resultBlock:)`
+- `playBackPauseWithDeviceId(deviceId:channelId:resultBlock:)`
+- `playBackResumeWithDeviceId(deviceId:channelId:resultBlock:)`
+- `playBackSeekWithDeviceId(deviceId:channelId:timeStr:resultBlock:)`
+- `playBackSetSpeedWithDeviceId(deviceId:channelId:speed:resultBlock:)`
+
+Time format conventions (used in playback page):
+
+- DateTime: `yyyy-MM-dd HH:mm:ss`
+- Single-day query: `yyyy-MM-dd` (length 10)
+
+### 3.6 Playback Record Queries
+
+- `getPlayBackOneDayRecordListWithDeviceId(deviceId:channelId:dayStr:resultBlock:)`
+- `getPlayBackRecordWithinACertainPeriodOfTimeWithDeviceId(deviceId:channelId:startDateStr:endDateStr:resultBlock:)`
+- `getWhichDaysWithinTheTimePeriodHavePlaybackRecordsWithDeviceId(deviceId:channelId:startDayStr:endDayStr:resultBlock:)`
+
+### 3.7 Channel Monitoring and Renderer Cleanup
+
+- `startDeviceChannelAlarmMonitoring(deviceId:)`
+- `stopDeviceChannelAlarmMonitoring(deviceId:)`
+- `closeGL()`
 
 ---
 
-## Threading
+## 4. Live Page Call Flow (`LivePlayerPage`)
 
-- Callbacks from `SunellSDKManager` are bridged to your `Delegate` on the appropriate queues as implemented in Objective-C (often main queue for UI-related delegate methods).
-- `resultBlock` closures in static methods follow the underlying manager behavior.
+Recommended sequence:
+
+1. Call `liveStart(...)` after layout is ready.
+2. Wait for `sunellSDKVideoOperation` with `eventId == 100` before enabling toolbar actions.
+3. After video success, request capabilities:
+   - `getDeviceCapacityWithDeviceId` (Talk/PTZ)
+   - `getWhiteLightAbilityWithDeviceId` (White light)
+4. When switching channel pages, call `liveStop` first, then `liveStart` for target channel.
+5. On app background/page exit:
+   - `liveStop`
+   - `closeGL`
+
+Live toolbar mapping:
+
+- Capture: `captureImageWithDeviceId`
+- Audio toggle: `audioSwitchWithDeviceId`
+- Talk toggle: `talkSwitchWithDeviceId`
+- Stream switch: `qualityAdjustmentWithDeviceId`
+- PTZ: `openPTZ` / `operationPTZ` / `stopPTZ`
+- White light: `getWhiteLightSwitchParam` + `setWhiteLightSwitchParam`
+- Alarm audio: `getAudioAlarmInfo` + `playAudioAlarm`
+- Channel monitor: `startDeviceChannelAlarmMonitoring` / `stopDeviceChannelAlarmMonitoring`
 
 ---
 
-## Objective-C parity
+## 5. Playback Page Call Flow (`PlayerBackPage`)
 
-For full parameter semantics and error codes, see `SunellSDKManager.h` and the bundled headers in `SunellSDK.xcframework`. Swift names use `SunellSDKEntry` to avoid clashing with the module name `SunellSDK`.
+Recommended sequence:
+
+1. Call `playBackStart(...)` after layout is ready.
+2. After start succeeds, call `playBackSetSpeed(..., .x1)` to sync default speed.
+3. Control actions:
+   - Pause: `playBackPause`
+   - Resume: `playBackResume`
+   - Seek: `playBackSeek`
+   - Speed: `playBackSetSpeed(.x1/.x2)`
+4. When switching channel pages, call `playBackStop` first, then `playBackStart` on the new channel.
+5. On page exit/background:
+   - `playBackStop`
+   - `closeGL`
+
+Query mapping:
+
+- One-day records: `getPlayBackOneDayRecordList`
+- Time-range records: `getPlayBackRecordWithinACertainPeriodOfTime`
+- Days with recordings: `getWhichDaysWithinTheTimePeriodHavePlaybackRecords`
 
 ---
 
-## Version notes (binary)
+## 6. Key Parameters and Best Practices
 
-When integrating via **Swift Package Manager** with a **binary** `SunellSDK.xcframework`, ensure the slice matches your run destination (device vs simulator). See distribution notes in the repository for simulator architecture support.
+- `channelId`
+  - IPC default: `1`
+  - NVR: map from real channel list
+- `streamType` / `qualityType`
+  - `1 = HD`, `2 = SD`
+- `playNum` (alarm audio)
+  - `0` usually means loop forever (native contract)
+- `result` interpretation
+  - Most control APIs: success on `0`
+  - Start-type APIs: often success on `>= 0`, and should be confirmed with delegate events
 
-## Vendor C headers
+Stability tips (already applied in Demo):
 
-Files such as `sdk_def.h` / `sdks.h` under `SunellBaseSDK` may still contain legacy comments or non-UTF8 text from the native SDK. The Swift API surface documented here refers to **`SunellSDK.swift`** and the public Objective-C headers shipped with the framework.
+- Do not enable PTZ/Talk/White-light actions before video is truly ready.
+- On lifecycle transitions (background, page pop), always perform `stop + closeGL`.
+- Use `eventId == 100` as the UI unlock signal for "video actually opened".
+
+---
+
+## 7. Minimal Integration Example
+
+```swift
+import SunellSDK
+
+final class Demo: NSObject, SunellSDKEntry.Delegate {
+    func start() {
+        SunellSDKEntry.delegate = self
+        SunellSDKEntry.connectDevByIP(ip: "192.168.1.10", port: 37777, user: "admin", pwd: "123456") { ret, dev in
+            guard ret >= 0 else { return }
+            // Keep dev.deviceId for liveStart/playBackStart later.
+        }
+    }
+
+    func sunellSDKVideoOperation(_ deviceId: String, channelId: Int, eventId: Int, msg: String, playModel: Int) {}
+    func sunellSDKDeviceErrorStatus(_ deviceModel: SunellDeviceModel, _ type: Int32) {}
+    func sunellSDKStartAutoReconnect(_ deviceModel: SunellDeviceModel) {}
+    func sunellSDKEndAutoReconnect(_ deviceModel: SunellDeviceModel, _ isSuccess: Bool) {}
+    func sunellSDKAlarmInfo(_ deviceModel: SunellDeviceModel, alarmInfo: String) {}
+    func sunellSDKChannelStatusChange(_ channelModel: SunellChannelModel) {}
+}
+```
+
+---
+
+## 8. Reference Files
+
+- `SunellSDK/SunellSDK.swift`
+- `TestDemo/Player/LiveViewController/LivePlayerPage.swift`
+- `TestDemo/Player/PlayerBackViewController/PlayerBackPage.swift`
+- `SunellSDK/SunellSDKManager.h`
