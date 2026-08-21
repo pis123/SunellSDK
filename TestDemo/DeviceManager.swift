@@ -40,9 +40,8 @@ final class DeviceManager: NSObject {
                     let port = Int(device.port)
                     let user = device.userName
                     let pwd = device.pwd
-                    SunellSDKEntry.connectDevByP2P(uuid: uuid, port: port, user: user, pwd: pwd) { [weak self] _, deviceModel in
+                    SunellSDKEntry.connectDevByP2P(uuid: uuid, port: port, user: user, pwd: pwd) { [weak self] handle, deviceModel in
                         guard let self else { return }
-                        
                         self.applyReconnectedStatus(deviceModel: deviceModel) { $0.deviceUUID == uuid }
                     }
                 } else {

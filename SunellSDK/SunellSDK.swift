@@ -273,4 +273,9 @@ public class SunellSDKEntry: NSObject {
     public static func closeGL(){
         SunellSDKManager.closeGL()
     }
+    public static func getAlarmList(deviceId:String,channelId:Int,sDate:String,eDate:String,resultBlock:@escaping(Int,String) -> Void){
+        SunellSDKManager.getAlarmList(withDeviceId: deviceId, channelId: Int32(channelId), startDateStr: sDate, endDateStr: eDate) { ret, jsonStr in
+            resultBlock(Int(ret),jsonStr);
+        }
+    }
 }

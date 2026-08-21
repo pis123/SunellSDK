@@ -110,58 +110,30 @@ final class LivePlayerPage: UIViewController {
         b.addTarget(self, action: #selector(channelStatusMonitorTapped), for: .touchUpInside)
         b.setTitle(TKLocalizedString("TK_ChannelStatusMonitorStop"), for: .selected)
         b.isSelected = false
-        b.titleLabel?.numberOfLines = 1
-        b.titleLabel?.adjustsFontSizeToFitWidth = false
-        b.contentEdgeInsets = UIEdgeInsets(top: 8, left: 10, bottom: 8, right: 10)
-        b.setContentHuggingPriority(.required, for: .horizontal)
-        b.setContentCompressionResistancePriority(.required, for: .horizontal)
+        return b
+    }()
+    private lazy var alarmListBtn: UIButton = {
+        let b = Self.makeToolbarButton(title: TKLocalizedString("TK_AlarmList"))
+        b.addTarget(self, action: #selector(getAlarmList), for: .touchUpInside)
         return b
     }()
 
-    /// First row: Snapshot / Audio / Talk / Stream / PTZ.
-    private lazy var toolbarRow1: UIStackView = {
-        let s = UIStackView(arrangedSubviews: [
-            captureButton, audioButton, talkButton, streamButton, ptzButton
-        ])
-        s.translatesAutoresizingMaskIntoConstraints = false
-        s.axis = .horizontal
-        s.alignment = .fill
-        s.distribution = .fillEqually
-        s.spacing = 8
-        return s
-    }()
-    /// Second row: White Light and Alarm Audio (below the PTZ row).
-    private lazy var toolbarRow2: UIStackView = {
-        let s = UIStackView(arrangedSubviews: [whiteLightButton, alarmButton])
-        s.translatesAutoresizingMaskIntoConstraints = false
-        s.axis = .horizontal
-        s.alignment = .fill
-        s.distribution = .fillEqually
-        s.spacing = 8
-        return s
-    }()
-    /// Third row: Channel status listener (below white light row); left-aligned with width slightly wider than text.
-    private lazy var toolbarRow3: UIStackView = {
-        let spacer = UIView()
-        spacer.translatesAutoresizingMaskIntoConstraints = false
-        spacer.setContentHuggingPriority(.defaultLow, for: .horizontal)
-        spacer.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
-        let s = UIStackView(arrangedSubviews: [channelStatusMonitorButton, spacer])
-        s.translatesAutoresizingMaskIntoConstraints = false
-        s.axis = .horizontal
-        s.alignment = .center
-        s.distribution = .fill
-        s.spacing = 0
-        return s
-    }()
-    private lazy var toolbarStack: UIStackView = {
-        let s = UIStackView(arrangedSubviews: [toolbarRow1, toolbarRow2, toolbarRow3])
-        s.translatesAutoresizingMaskIntoConstraints = false
-        s.axis = .vertical
-        s.alignment = .fill
-        s.distribution = .fill
-        s.spacing = 10
-        return s
+    /// All toolbar buttons under the player; laid out LTR then wrap top→bottom.
+    private lazy var toolbarButtons: [UIButton] = [
+        captureButton, audioButton, talkButton, streamButton, ptzButton,
+        whiteLightButton, alarmButton, channelStatusMonitorButton, alarmListBtn
+    ]
+
+    private lazy var toolbarFlowView: ToolbarFlowView = {
+        let v = ToolbarFlowView()
+        v.translatesAutoresizingMaskIntoConstraints = false
+        v.setContentHuggingPriority(.required, for: .vertical)
+        v.setContentCompressionResistancePriority(.required, for: .vertical)
+        v.itemSpacing = 10
+        v.lineSpacing = 10
+        v.buttonHeight = Self.toolbarButtonHeight
+        v.buttons = toolbarButtons
+        return v
     }()
 
     private let pageIndicatorContainer: UIView = {
@@ -231,7 +203,7 @@ final class LivePlayerPage: UIViewController {
 
         view.addSubview(playAreaView)
         view.addSubview(bottomPlaceholderView)
-        bottomPlaceholderView.addSubview(toolbarStack)
+        bottomPlaceholderView.addSubview(toolbarFlowView)
 
         playAreaView.bgScrollView.delegate = self
         // When channel count or device instance changes and cells must be physically rebuilt, run `liveStop` + `closeGL` first,
@@ -256,9 +228,9 @@ final class LivePlayerPage: UIViewController {
             bottomPlaceholderView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             bottomPlaceholderView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
 
-            toolbarStack.topAnchor.constraint(equalTo: bottomPlaceholderView.safeAreaLayoutGuide.topAnchor, constant: 12),
-            toolbarStack.leadingAnchor.constraint(equalTo: bottomPlaceholderView.leadingAnchor, constant: 16),
-            toolbarStack.trailingAnchor.constraint(equalTo: bottomPlaceholderView.trailingAnchor, constant: -16),
+            toolbarFlowView.topAnchor.constraint(equalTo: bottomPlaceholderView.safeAreaLayoutGuide.topAnchor, constant: 12),
+            toolbarFlowView.leadingAnchor.constraint(equalTo: bottomPlaceholderView.leadingAnchor, constant: 16),
+            toolbarFlowView.trailingAnchor.constraint(equalTo: bottomPlaceholderView.trailingAnchor, constant: -16),
 
             pageIndicatorContainer.centerXAnchor.constraint(equalTo: playAreaView.centerXAnchor),
             pageIndicatorContainer.bottomAnchor.constraint(equalTo: playAreaView.bottomAnchor, constant: -12),
@@ -510,7 +482,7 @@ final class LivePlayerPage: UIViewController {
 
     /// Toolbar buttons: gray and untappable when disabled; enable only after successful playback callback (`eventId == 100`).
     private func setToolbarInteractionEnabled(_ enabled: Bool) {
-        let alwaysButtons: [UIButton] = [captureButton, audioButton, streamButton, alarmButton, channelStatusMonitorButton]
+        let alwaysButtons: [UIButton] = [captureButton, audioButton, streamButton, alarmButton, channelStatusMonitorButton,alarmListBtn]
         for b in alwaysButtons {
             b.isEnabled = enabled
             b.isUserInteractionEnabled = enabled
@@ -815,7 +787,18 @@ final class LivePlayerPage: UIViewController {
             isHw: false,
             caLayer: cell.glLayer) { ret in
                 if ret >= 0 { // >= 0: live start API succeeded.
-                    print("start Live success");
+                    print("start Live success \(ret)");
+                    if(self.device.channels.count > 0){
+                        for channelModel in self.device.channels {
+                            if(channelModel.deviceId == self.device.deviceId && channelModel.channelId == chId){
+                                channelModel.stream_id = Int32(Int(ret));
+                                channelModel.playType = 1;
+                            }
+                        }
+                    }else {
+                        self.device.stream_id = Int32(Int(ret))
+                        self.device.playType = 1;
+                    }
                 }else {
                     print("start Live error");
                 }
@@ -992,6 +975,7 @@ final class LivePlayerPage: UIViewController {
             isAudioOn ? TKLocalizedString("TK_Audio") : TKLocalizedString("TK_Mute"),
             for: .normal
         )
+        toolbarFlowView.reloadLayout()
         audioButton.isEnabled = false
         SunellSDKEntry.audioSwitchWithDeviceId(deviceId: device.deviceId, channelId: currentChannel, isOpen: isAudioOn) { result in
             self.audioButton.isEnabled = true
@@ -1023,6 +1007,7 @@ final class LivePlayerPage: UIViewController {
             isStreamHD ? TKLocalizedString("TK_StreamHD") : TKLocalizedString("TK_StreamSD"),
             for: .normal
         )
+        toolbarFlowView.reloadLayout()
         SunellSDKEntry.qualityAdjustmentWithDeviceId(deviceId: device.deviceId, channelId: currentChannel, qualityType: isStreamHD ? 1 : 2) { result in
             if result == 0 {
                 print("change stream option Success")
@@ -1112,7 +1097,20 @@ final class LivePlayerPage: UIViewController {
             }
         }
     }
-
+    @objc private func getAlarmList() {
+        var startDateStr = "2026-08-15 00:12:00";
+        var endDateStr = "2026-08-20 10:32:40";
+        SunellSDKEntry.getAlarmList(deviceId: device.deviceId, channelId: self.currentChannel, sDate: startDateStr, eDate: endDateStr) { ret, jsonStr in
+            if(ret == 0){
+                print("getAlarmList success,retStr:\(jsonStr)")
+                /**
+                 getAlarmList success,retStr:{"is_more":false,"data":[{"dev_ip":"","src_type":2,"src_id":1,"dev_id":"FF2733","dev_type":0,"main_type":1,"sub_type":2,"ipc_key_id":0,"channel_id":-1,"description":"","time":"2026-08-20 09:38:02"},{"dev_ip":"","src_type":2,"src_id":1,"dev_id":"FF2733","dev_type":0,"main_type":1,"sub_type":2,"ipc_key_id":0,"channel_id":-1,"description":"","time":"2026-08-20 09:32:45"},{"dev_ip":"","src_type":5,"src_id":1,"dev_id":"FF2733","dev_type":0,"main_type":1,"sub_type":5,"ipc_key_id":0,"channel_id":-1,"description":"","time":"2026-08-20 06:53:47"}]}
+                 */
+            }else {
+                print("getAlarmList fail,ret:\(ret),msg:\(jsonStr)")
+            }
+        }
+    }
     /// Toggle switch-like fields in device JSON and serialize back to string; try common field names first, otherwise use the first integer key with value 0/1.
     private static func toggleWhiteLightInParamJSON(_ json: String, completion: @escaping (String?) -> Void) {
         DispatchQueue.global(qos: .userInitiated).async {
@@ -1159,21 +1157,106 @@ final class LivePlayerPage: UIViewController {
         }
     }
 
+    /// Matches previous toolbar button visual height (font 13 + vertical insets 8).
+    private static let toolbarButtonHeight: CGFloat = 36
+
     private static func makeToolbarButton(title: String) -> UIButton {
         let b = UIButton(type: .custom)
         b.setTitle(title, for: .normal)
         b.setTitleColor(.black, for: .normal)
         b.titleLabel?.font = .systemFont(ofSize: 13, weight: .medium)
-        b.titleLabel?.adjustsFontSizeToFitWidth = true
-        b.titleLabel?.minimumScaleFactor = 0.5
+        b.titleLabel?.numberOfLines = 1
+        b.titleLabel?.adjustsFontSizeToFitWidth = false
         b.titleLabel?.textAlignment = .center
         b.layer.borderColor = UIColor.black.cgColor
         b.layer.borderWidth = 1
         b.layer.cornerRadius = 5
         b.clipsToBounds = true
         b.translatesAutoresizingMaskIntoConstraints = false
-        b.contentEdgeInsets = UIEdgeInsets(top: 8, left: 4, bottom: 8, right: 4)
+        b.contentEdgeInsets = UIEdgeInsets(top: 8, left: 10, bottom: 8, right: 10)
+        b.setContentHuggingPriority(.required, for: .horizontal)
+        b.setContentCompressionResistancePriority(.required, for: .horizontal)
         return b
+    }
+}
+
+// MARK: - ToolbarFlowView
+
+/// Lays out buttons left→right, wrapping top→bottom; width follows title, height is fixed.
+private final class ToolbarFlowView: UIView {
+
+    var itemSpacing: CGFloat = 10
+    var lineSpacing: CGFloat = 10
+    var buttonHeight: CGFloat = 36
+
+    var buttons: [UIButton] = [] {
+        didSet {
+            subviews.forEach { $0.removeFromSuperview() }
+            buttons.forEach { button in
+                button.translatesAutoresizingMaskIntoConstraints = true
+                addSubview(button)
+            }
+            reloadLayout()
+        }
+    }
+
+    func reloadLayout() {
+        invalidateIntrinsicContentSize()
+        setNeedsLayout()
+    }
+
+    override var intrinsicContentSize: CGSize {
+        let width = bounds.width > 0 ? bounds.width : UIScreen.main.bounds.width - 32
+        return CGSize(width: UIView.noIntrinsicMetric, height: contentHeight(for: width))
+    }
+
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        let width = bounds.width
+        guard width > 0 else { return }
+
+        var x: CGFloat = 0
+        var y: CGFloat = 0
+        for button in buttons {
+            let buttonWidth = preferredWidth(for: button)
+            if x > 0, x + buttonWidth > width {
+                x = 0
+                y += buttonHeight + lineSpacing
+            }
+            button.frame = CGRect(x: x, y: y, width: buttonWidth, height: buttonHeight)
+            x += buttonWidth + itemSpacing
+        }
+
+        let newHeight = contentHeight(for: width)
+        if abs(bounds.height - newHeight) > 0.5 {
+            invalidateIntrinsicContentSize()
+        }
+    }
+
+    private func contentHeight(for width: CGFloat) -> CGFloat {
+        guard !buttons.isEmpty, width > 0 else { return 0 }
+        var x: CGFloat = 0
+        var rows = 1
+        for button in buttons {
+            let buttonWidth = preferredWidth(for: button)
+            if x > 0, x + buttonWidth > width {
+                rows += 1
+                x = 0
+            }
+            x += buttonWidth + itemSpacing
+        }
+        return CGFloat(rows) * buttonHeight + CGFloat(rows - 1) * lineSpacing
+    }
+
+    private func preferredWidth(for button: UIButton) -> CGFloat {
+        let font = button.titleLabel?.font ?? .systemFont(ofSize: 13, weight: .medium)
+        var textWidth: CGFloat = 0
+        for state: UIControl.State in [.normal, .selected] {
+            guard let title = button.title(for: state), !title.isEmpty else { continue }
+            textWidth = max(textWidth, ceil((title as NSString).size(withAttributes: [.font: font]).width))
+        }
+        let horizontalInset = button.contentEdgeInsets.left + button.contentEdgeInsets.right
+        return max(textWidth + horizontalInset, 44)
     }
 }
 

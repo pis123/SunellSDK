@@ -12,10 +12,10 @@ class LocalDevicePage: UIViewController {
     private let rowHeight: CGFloat = 50
     private let horizontalMargin: CGFloat = 16
 
-    private let defaultAddress = "192.168.3.166"
+    private let defaultAddress = "192.168.3.181"
     private let defaultPort = 30001
     private let defaultUserName = "admin"
-    private let defaultPassword = "aaa111"
+    private let defaultPassword = "admin123"
 
     private lazy var addressTextField = createTextField(placeholder: TKLocalizedString("TK_AddressPlaceholder"))
     private lazy var portTextField: UITextField = {
@@ -129,7 +129,7 @@ class LocalDevicePage: UIViewController {
         guard (passwordTextField.text != nil) else {
             return
         }
-        
+ 
         showLoadingIndicator()
         SunellSDKEntry.connectDevByIP(
             ip: addressTextField.text!,

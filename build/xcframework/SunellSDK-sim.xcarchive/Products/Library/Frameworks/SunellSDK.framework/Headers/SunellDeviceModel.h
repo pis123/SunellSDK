@@ -27,6 +27,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,strong)NSArray<SunellChannelModel*> *channels;// Channel list
 @property(nonatomic,assign)SunellDeviceStatus status; // 1: online, 0: offline
 @property(nonatomic,assign)BOOL isP2PAdd;// Added via P2P
+@property(nonatomic,assign)int handle;// need connect Success
+@property(nonatomic,assign)int stream_id; // need open Live || playback Success
+@property(nonatomic,assign)int playType; // 0:normal ,1:Live，2:playback
 @end
 
 NS_ASSUME_NONNULL_END

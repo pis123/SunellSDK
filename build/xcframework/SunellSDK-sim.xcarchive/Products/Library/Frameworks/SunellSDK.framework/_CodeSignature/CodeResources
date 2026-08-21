@@ -6,11 +6,11 @@
 	<dict>
 		<key>Headers/SunellChannelModel.h</key>
 		<data>
-		atH9b3U0uhrUHoFLpwyEnniL8qg=
+		lwQFeGuB5s4S9JYFIRktXv6txBw=
 		</data>
 		<key>Headers/SunellDeviceModel.h</key>
 		<data>
-		d9FtYsgl722WTfMsB+LMgqQt+aU=
+		CHSxg3FkMUlAr9XWK4JkHfppPv0=
 		</data>
 		<key>Headers/SunellSDK.h</key>
 		<data>
@@ -18,7 +18,7 @@
 		</data>
 		<key>Headers/SunellSDKManager.h</key>
 		<data>
-		f2mEHbMaAuhyd8RXwg32AI/ENro=
+		hMHTFNjeTctteko9v33Eyx3QfFw=
 		</data>
 		<key>Info.plist</key>
 		<data>
@@ -26,11 +26,11 @@
 		</data>
 		<key>Modules/SunellSDK.swiftmodule/x86_64-apple-ios-simulator.abi.json</key>
 		<data>
-		77+SQ1BsMPI6zj/8roTVlPXMQuY=
+		uWnqKKClHrzgyfugGH4wbyyYyds=
 		</data>
 		<key>Modules/SunellSDK.swiftmodule/x86_64-apple-ios-simulator.private.swiftinterface</key>
 		<data>
-		fOyjutzpm3gURagaSNwXgwrFoAQ=
+		CZcOfuzCZ/puXlwMR7VdiaBRh2Y=
 		</data>
 		<key>Modules/SunellSDK.swiftmodule/x86_64-apple-ios-simulator.swiftdoc</key>
 		<data>
@@ -38,11 +38,11 @@
 		</data>
 		<key>Modules/SunellSDK.swiftmodule/x86_64-apple-ios-simulator.swiftinterface</key>
 		<data>
-		fOyjutzpm3gURagaSNwXgwrFoAQ=
+		CZcOfuzCZ/puXlwMR7VdiaBRh2Y=
 		</data>
 		<key>Modules/SunellSDK.swiftmodule/x86_64-apple-ios-simulator.swiftmodule</key>
 		<data>
-		9cjOwEj7MjWdJETceVUibvKxG60=
+		IL4pYZkgqweJZEJyGxKQ5NTIN58=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
@@ -59,14 +59,14 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			vL/u9TTva4uqqoKGHWvLcRlkXFx7QFjXKmooU70N1r4=
+			y3Ak9ifilE8ej2bgRUGGwPwo1rRQ5tAJsFcEe2KatbI=
 			</data>
 		</dict>
 		<key>Headers/SunellDeviceModel.h</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			up1ihJmuKi6cSJstvQWvPK/VDrdnBf9Tx410K5D6GR0=
+			zH8FdmmnmWwqNktL8iviRbBac7sIfMgd4Usr2qSDFWU=
 			</data>
 		</dict>
 		<key>Headers/SunellSDK.h</key>
@@ -80,21 +80,21 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			tTQjhCEhcGIS71fl4DhBlJpqFYR70cwmegG1ex91Wo4=
+			rtR7JA+DEFnQaDcpd0pKpe+LwZoQ5bKrHRIqogxfO+4=
 			</data>
 		</dict>
 		<key>Modules/SunellSDK.swiftmodule/x86_64-apple-ios-simulator.abi.json</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			3yHTamSgkEP91KfN3LM9ko1aeuKMgOu/8lUE6MlXU8Q=
+			1lUQuSWErvN3BsyDM2KFdXor5YIFWyPCHQ5jDUm988Y=
 			</data>
 		</dict>
 		<key>Modules/SunellSDK.swiftmodule/x86_64-apple-ios-simulator.private.swiftinterface</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			EHsyo1aiYehkZAXOXdlAsAfidBYZFKzXF5EAv0hutzY=
+			0Fa+G884AD7nPFbNNFnNQ6nWVEqAIXHBOMimJARy+Xw=
 			</data>
 		</dict>
 		<key>Modules/SunellSDK.swiftmodule/x86_64-apple-ios-simulator.swiftdoc</key>
@@ -108,14 +108,14 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			EHsyo1aiYehkZAXOXdlAsAfidBYZFKzXF5EAv0hutzY=
+			0Fa+G884AD7nPFbNNFnNQ6nWVEqAIXHBOMimJARy+Xw=
 			</data>
 		</dict>
 		<key>Modules/SunellSDK.swiftmodule/x86_64-apple-ios-simulator.swiftmodule</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			hYmGrvmPU204sANCfE79bZWvkgazq3/hkx/zWXPUW+E=
+			YjM0kpBeVQJ7TzzkFEK95wYENho0MibXy/X+vTLKfG0=
 			</data>
 		</dict>
 		<key>Modules/module.modulemap</key>

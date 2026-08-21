@@ -901,6 +901,17 @@ final class PlayerBackPage: UIViewController {
         ) { [weak self] ret in
             guard let self else { return }
             if ret >= 0 {
+                if(self.device.channels.count > 0){
+                    for channelModel in self.device.channels {
+                        if(channelModel.deviceId == self.device.deviceId && channelModel.channelId == chId){
+                            channelModel.stream_id = Int32(Int(ret));
+                            channelModel.playType = 2;
+                        }
+                    }
+                }else {
+                    self.device.stream_id = Int32(Int(ret))
+                    self.device.playType = 2;
+                }
                 print("playback start success ch=\(chId)")
                 self.syncPlaybackSpeedToDevice(speed: .x1)
             } else {

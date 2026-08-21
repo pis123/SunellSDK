@@ -100,6 +100,7 @@ public enum SunellDeviceChannelStatus : Swift.Int, Swift.CaseIterable {
   @objc public static func startDeviceChannelAlarmMonitoring(deviceId: Swift.String)
   @objc public static func stopDeviceChannelAlarmMonitoring(deviceId: Swift.String)
   @objc public static func closeGL()
+  @objc public static func getAlarmList(deviceId: Swift.String, channelId: Swift.Int, sDate: Swift.String, eDate: Swift.String, resultBlock: @escaping (Swift.Int, Swift.String) -> Swift.Void)
   @objc deinit
 }
 extension SunellSDK.SunellPlaybackSpeed : Swift.Equatable {}

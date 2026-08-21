@@ -58,6 +58,7 @@ typedef enum {
  * Return value > 0 usually means success (stream id per native SDK).
  */
 + (void)liveStartWithDevice:(NSString*)deviceId channelId:(int)channelId  streamType:(int)streamType isHwDec:(BOOL)isHwDec layer:(CAEAGLLayer*)caLayer resultBlock:(void(^)(int result))resultBlock;
+
 /**
  * Stop live preview.
  */
@@ -165,6 +166,15 @@ typedef enum {
 // Get days that contain playback records within a time range
 + (void)getWhichDaysWithinTheTimePeriodHavePlaybackRecordsWithDeviceId:(NSString*)deviceId channelId:(int)channelId startDayStr:(NSString*)startDayStr endDayStr:(NSString*)endDayStr resultBlock:(void(^)(int result,NSString* jsonStr))resultBlock;
 + (void)closeGL;
+
+// Get alarm_list
+// sDateStr:yyyy-MM-dd HH:mm:ss
+// eDateStr:yyyy-MM-dd HH:mm:ss
+// SDKS_API int sdks_dev_get_alarm_list(unsigned int handle, int chn, const char* s_time, const char* e_time, char** p_result);
++(void)getAlarmListWithDeviceId:(NSString*)deviceId channelId:(int)channelId startDateStr:(NSString*)sDateStr endDateStr:(NSString*)eDateStr resultBlock:(void(^)(int result,NSString *jsonStr))resultBlock;
+
+
+
 @end
 
 NS_ASSUME_NONNULL_END

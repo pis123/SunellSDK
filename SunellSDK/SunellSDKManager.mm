@@ -57,9 +57,6 @@ NS_ASSUME_NONNULL_BEGIN
         SunellInnerDeviceModel *innerDeviceModle = [self getInnerDeviceModelByDeviceId:deviceModel.deviceId];
         innerDeviceModle.connectHandle = handel;
         innerDeviceModle.deviceModel = deviceModel;
-        // 新 TCP 连接后旧的预览/回放 stream id 与 live|pb 模式绑定均失效，避免混用句柄。
-        innerDeviceModle.handleType = 0;
-        [innerDeviceModle.playerHandleDictionary removeAllObjects];
         dict[deviceModel.deviceId] = innerDeviceModle;
     }else { // New device entry.
         SunellInnerDeviceModel *innerDeviceModle = [[SunellInnerDeviceModel alloc]init];
@@ -84,9 +81,8 @@ NS_ASSUME_NONNULL_BEGIN
     [SunellSDKManager shared].handleDict = dict;
 }
 // Store playback stream handle.
-+ (void)addPlayerHandle:(int)playHandle deviceId:(NSString*)deviceId channelId:(int)channelId isLive:(BOOL)isLive{
++ (void)addPlayerHandle:(int)playHandle deviceId:(NSString*)deviceId channelId:(int)channelId{
     SunellInnerDeviceModel *innerDeviceModle = [self getInnerDeviceModelByDeviceId:deviceId];
-    innerDeviceModle.handleType = isLive ? 1 : 2;
     [innerDeviceModle savePlayeHandleByDeviceId:deviceId channelId:channelId playhandle:playHandle];
 }
 
@@ -300,13 +296,9 @@ static void deviceDisconnectCallback(unsigned int handle, void *p_obj, int type)
 
 #pragma mark - Disconnect device
 + (void)disConnectDevByDeviceId:(NSString*)deviceId{
-    // 移除通道状态监听
-    [self stopDeviceChannelStatusMonitoring:deviceId];
     int handle = [SunellSDKManager getConnectHandleByDeviceId:deviceId];
-    // 移除缓存中的hanle
-    [self removeHandleWithdeviceId:deviceId];
-    // 断开链接
     sdks_dev_conn_close(handle);
+    [self removeHandleWithdeviceId:deviceId];
 }
 #pragma mark - Fetch device info by handle
 + (void)getDeviceInfoByHandel:(int)handle localId:(NSString*)devID reulstBlock:(void (^)(SunellDeviceModel *device))resultBlock{
@@ -319,6 +311,7 @@ static void deviceDisconnectCallback(unsigned int handle, void *p_obj, int type)
             // Success.
             deviceModel = [[SunellDeviceModel alloc]init];
             deviceModel.deviceId = devID;
+            deviceModel.handle = handle;
             deviceModel.status = SunellDeviceStatus_online;
             deviceModel.deviceUUID = [SunellSafeUtil safeStringFromCString:info.dev_id];
             deviceModel.deviceName = [SunellSafeUtil safeStringFromCString:info.dev_name];
@@ -437,16 +430,9 @@ void startVideoResultCb(unsigned int handle, int stream_id, void* p_obj, const c
 }
 #pragma mark - Live preview start
 + (void)liveStartWithDevice:(NSString*)deviceId channelId:(int)channelId  streamType:(int)streamType isHwDec:(BOOL)isHwDec layer:(CAEAGLLayer*)caLayer resultBlock:(nonnull void (^)(int))resultBlock{
-    void (^doLiveStart)(void) = ^{
+    __block int nRet = -1;
+    void (^start)(void) = ^{
         int handle = [self getConnectHandleByDeviceId:deviceId];
-        if (handle < HandleMinValue) {
-            if (resultBlock) {
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    resultBlock(-1);
-                });
-            }
-            return;
-        }
         void *pWnd = (__bridge void *)(caLayer);
         SunellRequestInfo *requestInfo = [[SunellRequestInfo alloc]init];
         requestInfo.requestType = SunellRequestType_openLive;
@@ -464,46 +450,20 @@ void startVideoResultCb(unsigned int handle, int stream_id, void* p_obj, const c
         dispatch_sync(dispatch_get_main_queue(), ^{
             startRet = sdks_md_live_start(handle, channelId, streamType, pWnd, isHwDec, startVideoResultCb, (void*)cStr);
         });
-        int nRet = startRet;
+        nRet = startRet;
         NSLog(@"SunellSDKManager liveStartWithDevice handle:%d, nRet:%d, chanelId:%d, devID:%@, dict:%@", handle,nRet,channelId,deviceId,[SunellSDKManager shared].handleDict);
         if (nRet >= 0) { // nRet is live stream id; store for later video ops.
-            [self addPlayerHandle:nRet deviceId:deviceId channelId:channelId isLive:YES];
+            // sdks_md_live_start succeeded.
+            [self addPlayerHandle:nRet deviceId:deviceId channelId:channelId];
+            //            [self addPlayerHandle:nRet deviceId:deviceId];
         }
         if (resultBlock) {
             dispatch_async(dispatch_get_main_queue(), ^{
                 resultBlock(nRet);
             });
+            
         }
-    };
-    void (^start)(void) = ^{
-        SunellInnerDeviceModel *innerModel = [self getInnerDeviceModelByDeviceId:deviceId];
-        if (!innerModel || !innerModel.deviceModel) {
-            if (resultBlock) {
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    resultBlock(-1);
-                });
-            }
-            return;
-        }
-        // 回放与实时不能共用同一 dev 连接：若当前连接已用于回放，则断开后重连得到新 connect handle 再开预览。
-        if (innerModel.handleType == 2) {
-            SunellSDKManager *sdkMgr = [SunellSDKManager shared];
-            [self reConnectWithDeviceModel:innerModel resultBlcok:^(BOOL ret) {
-                if (!ret) {
-                    if (resultBlock) {
-                        dispatch_async(dispatch_get_main_queue(), ^{
-                            resultBlock(-1);
-                        });
-                    }
-                    return;
-                }
-                [sdkMgr.sunellThread asyncExecute:^{
-                    doLiveStart();
-                }];
-            }];
-            return;
-        }
-        doLiveStart();
+        
     };
     SunellSDKManager *sdkMgr = [SunellSDKManager shared];
     [sdkMgr.sunellThread invalidatePendingAsyncWork];
@@ -541,9 +501,6 @@ void startVideoResultCb(unsigned int handle, int stream_id, void* p_obj, const c
         SunellInnerDeviceModel *inner = [self getInnerDeviceModelByDeviceId:deviceId];
         if (inner) {
             [inner removePlayerHandleForDeviceId:deviceId channelId:channelId];
-            if (inner.playerHandleDictionary.count == 0) {
-                inner.handleType = 0;
-            }
         }
         if (resultBlock) {
             dispatch_async(dispatch_get_main_queue(), ^{
@@ -606,7 +563,7 @@ void deviceChannelStateCallBack(unsigned int handle, void **p_data, void *p_obj)
     SunellChannelModel *model = [[SunellChannelModel alloc]init];
     model.deviceId = deviceId;
     model.channelId = channelid.intValue;
-    model.status = state.intValue == 4098 ? SunellDeviceStatus_online : SunellDeviceStatus_offline;
+    model.status = state.intValue == 1 ? SunellDeviceStatus_online : SunellDeviceStatus_offline;
     model.channleName = channelName;
     if ([[SunellSDKManager shared].delegate respondsToSelector:@selector(sunellSDKChannelStatusChangeNotiWithChannelModel:)]) {
         [[SunellSDKManager shared].delegate sunellSDKChannelStatusChangeNotiWithChannelModel:model];
@@ -1310,16 +1267,9 @@ void talkOpenIntercomDbCb(unsigned int db,void *p_obj){
 // 打开回放
 + (void)playbackStartWithDeviceId:(NSString*)deviceId channelId:(int)channelId startTimeStr:(NSString*)startTimeStr streamType:(int)streamType isHwDec:(BOOL)isHwDec layer:(CAEAGLLayer*)caLayer resultBlock:(void(^)(int result))resultBlock{
     
-    void (^doPlaybackStart)(void) = ^{
+    __block int nRet = -1;
+    void (^start)(void) = ^{
         int handle = [self getConnectHandleByDeviceId:deviceId];
-        if (handle < HandleMinValue) {
-            if (resultBlock) {
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    resultBlock(-1);
-                });
-            }
-            return;
-        }
         void *pWnd = (__bridge void *)(caLayer);
         SunellRequestInfo *requestInfo = [[SunellRequestInfo alloc]init];
         requestInfo.requestType = SunellRequestType_openPlayback;
@@ -1337,48 +1287,23 @@ void talkOpenIntercomDbCb(unsigned int db,void *p_obj){
         // "Modifying properties of a view's layer off the main thread"（SDK 渲染线程也会触碰 layer）。
         __block int startRet = -1;
         dispatch_sync(dispatch_get_main_queue(), ^{
+            // startRet = sdks_md_live_start(handle, channelId, streamType, pWnd, isHwDec, startVideoResultCb, (__bridge void *)requestInfo);
             startRet = sdks_md_pb_start(handle, channelId, streamType, startTimeStr.UTF8String, pWnd, isHwDec,startVideoResultCb, (void *)cStr);
         });
-        int nRet = startRet;
+        nRet = startRet;
         NSLog(@"SunellSDKManager sdks_md_pb_start handle:%d, nRet:%d, chanelId:%d, devID:%@, dict:%@", handle,nRet,channelId,deviceId,[SunellSDKManager shared].handleDict);
-        if (nRet >= 0) {
-            [self addPlayerHandle:nRet deviceId:deviceId channelId:channelId isLive:NO];
+        if (nRet >= 0) { // nRet is live stream id; store for later video ops.
+            // sdks_md_live_start succeeded.
+            [self addPlayerHandle:nRet deviceId:deviceId channelId:channelId];
+            //            [self addPlayerHandle:nRet deviceId:deviceId];
         }
         if (resultBlock) {
             dispatch_async(dispatch_get_main_queue(), ^{
                 resultBlock(nRet);
             });
+            
         }
-    };
-    void (^start)(void) = ^{
-        SunellInnerDeviceModel *innerDeviceModel = [self getInnerDeviceModelByDeviceId:deviceId];
-        if (!innerDeviceModel || !innerDeviceModel.deviceModel) {
-            if (resultBlock) {
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    resultBlock(-1);
-                });
-            }
-            return;
-        }
-        // 实时与回放不能共用同一 dev 连接：若当前连接已用于预览，则断开后重连再开回放。
-        if (innerDeviceModel.handleType == 1) {
-            SunellSDKManager *sdkMgr = [SunellSDKManager shared];
-            [self reConnectWithDeviceModel:innerDeviceModel resultBlcok:^(BOOL ret) {
-                if (!ret) {
-                    if (resultBlock) {
-                        dispatch_async(dispatch_get_main_queue(), ^{
-                            resultBlock(-1);
-                        });
-                    }
-                    return;
-                }
-                [sdkMgr.sunellThread asyncExecute:^{
-                    doPlaybackStart();
-                }];
-            }];
-            return;
-        }
-        doPlaybackStart();
+        
     };
     SunellSDKManager *sdkMgr = [SunellSDKManager shared];
     [sdkMgr.sunellThread invalidatePendingAsyncWork];
@@ -1411,9 +1336,6 @@ void talkOpenIntercomDbCb(unsigned int db,void *p_obj){
         SunellInnerDeviceModel *inner = [self getInnerDeviceModelByDeviceId:deviceId];
         if (inner) {
             [inner removePlayerHandleForDeviceId:deviceId channelId:channelId];
-            if (inner.playerHandleDictionary.count == 0) {
-                inner.handleType = 0;
-            }
         }
         if (resultBlock) {
             dispatch_async(dispatch_get_main_queue(), ^{
@@ -1715,7 +1637,49 @@ void talkOpenIntercomDbCb(unsigned int db,void *p_obj){
     }
  
 }
-
+// SDKS_API int sdks_dev_get_alarm_list(unsigned int handle, int chn, const char* s_time, const char* e_time, char** p_result);
++(void)getAlarmListWithDeviceId:(NSString*)deviceId channelId:(int)channelId startDateStr:(NSString*)sDateStr endDateStr:(NSString*)eDateStr resultBlock:(void(^)(int result,NSString *jsonStr))resultBlock{
+    dispatch_async(dispatch_get_global_queue(0, 0), ^{
+        if (!deviceId || !sDateStr || !eDateStr) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                resultBlock(-1,@"Parameter error");
+            });
+            return;
+        }
+        int handle = [self getConnectHandleByDeviceId:deviceId];
+        if (handle < HandleMinValue) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                resultBlock(-1,@"Parameter error");
+            });
+            return;
+        }
+        const char * s_time = [sDateStr UTF8String];
+        const char *e_time = [eDateStr UTF8String];
+        if (s_time == NULL || strlen(s_time) == 0 || e_time == NULL || strlen(e_time) == 0) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                resultBlock(-1, @"Parameter error");
+            });
+            return;
+        }
+        char *resultStr = NULL;
+        SunellInnerDeviceModel *innerDeviceModel = [self getInnerDeviceModelByDeviceId:deviceId];
+        int chId = channelId;
+        if (innerDeviceModel.deviceModel.channels.count == 0) {
+            chId = -1;
+        }
+        int ret = sdks_dev_get_alarm_list(handle, chId, s_time, e_time, &resultStr);
+        if (ret == 0 && resultStr != NULL) {
+            NSString *jsonStr = [NSString stringWithUTF8String:resultStr];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                resultBlock(ret,jsonStr);
+            });
+        }else {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                resultBlock(ret,@"");
+            });
+        }
+    });
+}
 #pragma mark - private
 + (NSString*)s_dictToJsonStr:(NSDictionary*)dict{
     NSError *error = nil;

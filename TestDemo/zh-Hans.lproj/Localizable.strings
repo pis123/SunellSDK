@@ -74,3 +74,4 @@
 "TK_UsernamePlaceholder" = "请输入用户名";
 "TK_PasswordPlaceholder" = "请输入密码";
 "TK_QRCodePlaceholder" = "请输入二维码内容";
+"TK_AlarmList" = "报警列表";

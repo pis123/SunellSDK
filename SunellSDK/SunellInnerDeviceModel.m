@@ -17,7 +17,6 @@
 - (void)savePlayeHandleByDeviceId:(NSString*)deviceId channelId:(int)channelId playhandle:(int)playHandle{
     NSString *keyValue = [NSString stringWithFormat:@"%@%d",deviceId,channelId];
     self.playerHandleDictionary[keyValue] = @(playHandle);
-    
 }
 - (int)getPlayHandleByDeviceId:(NSString*)deviceId channelId:(int)channelId{
     NSString *keyValue = [NSString stringWithFormat:@"%@%d",deviceId,channelId];
