@@ -15,8 +15,8 @@ let package = Package(
     targets: [
         .binaryTarget(
             name: "SunellSDK",
-            url: "https://github.com/pis123/SunellSDK/releases/download/1.2.3/SunellSDK.xcframework.zip",
-            checksum: "ba37e4f51733eb662a640731f500521e0e9b14253475558b63ac4dfa78084dfa"
+            url: "https://github.com/pis123/SunellSDK/releases/download/1.2.4/SunellSDK.xcframework.zip",
+            checksum: "c6a9a44bc6ba50eb646d047a933b64678fe449f815ab20d36c8286cf405b033b"
         )
     ]
 )
