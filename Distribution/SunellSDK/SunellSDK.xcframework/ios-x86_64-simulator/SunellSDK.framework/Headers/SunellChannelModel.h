@@ -26,6 +26,8 @@ typedef enum : NSInteger {
 @property(nonatomic,strong)NSString *channleName;
 @property(nonatomic,assign)SunellDeviceCapacityType ptzCapacity;
 @property(nonatomic,assign)SunellDeviceCapacityType talkCapacity;
+@property(nonatomic,assign)int stream_id;
+@property(nonatomic,assign)int playType;
 @end
 
 NS_ASSUME_NONNULL_END
